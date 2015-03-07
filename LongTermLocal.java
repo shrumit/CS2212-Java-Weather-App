@@ -1,14 +1,17 @@
 /**
  * CS2212B - LongTermLocal class
- * @author dtsui8
+ * @author dtsui8, jxin6
  */
 
 public class LongTermLocal {
 
 	private double minTemp, maxTemp, sunriseTime, sunsetTime;
 	
-	public LongTermLocal ( ){
-		
+	public LongTermLocal (double minTemp, double maxTemp, double sunriseTime, double sunsetTime){
+		this.minTemp = minTemp;
+		this.maxTemp = maxTemp;
+		this.sunriseTime = sunriseTime;
+		this.sunsetTime = sunsetTime;
 	}
 	
 	private double getminTemp( ){
