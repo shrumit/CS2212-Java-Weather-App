@@ -4,7 +4,7 @@
  */
 public abstract class AbstractLocalWeather{
 
-  private double time, hours, mins, minTemp, maxTemp, sunriseTime, sunsetTime, windSpeed, windDirection, airPressure, humidity;
+  private double time, hours, mins, temp, minTemp, maxTemp, sunriseTime, sunsetTime, windSpeed, windDirection, airPressure, humidity;
   	private int year, month, date;
   	
   	public LocalWeather (int year, int month, int date, double time, double hours, double mins, double minTemp, double maxTemp, double sunriseTime, double sunsetTime, double windSpeed, double windDirection, double airPressure, double humidity)
