@@ -39,18 +39,19 @@ public abstract class AbstractLocalWeather{
   	
   	/** gets the local sunset time **/
   	abstract private double getsunsetTime();
-
-    /** gets the local wind speed **/
+  	
+  	/** gets the local wind speed **/
   	abstract private double windSpeed();
   	
   	/** gets the local wind direction **/
   	abstract private double windDirection();
-
-    /** gets the local air pressure **/
+  	
+  	/** gets the local air pressure **/
   	abstract private double airPressure();
   	
   	/** gets the local humidity **/
   	abstract private double humidity();
   	
   }
+
 }
