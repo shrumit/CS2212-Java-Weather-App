@@ -3,7 +3,9 @@
  * @author dtsui8, jxin6
  */
 
-public class LocalWeather {
+import org.json.JSONObject;
+
+public class LocalWeather extends AbstractLocalWeather{
 
 	private double time, hours, mins, temp, minTemp, maxTemp, sunriseTime, sunsetTime, windSpeed, windDirection, airPressure, humidity;
 	private int year, month, date;
@@ -26,7 +28,6 @@ public class LocalWeather {
 	}
 	
 	private double getTime( ){
-		
 		return time;
 	}
 	
@@ -35,22 +36,18 @@ public class LocalWeather {
 	}
 	
 	private double getminTemp( ){
-		
 		return minTemp;
 	}
 	
 	private double getmaxTemp( ){
-		
 		return minTemp;
 	}
 	
 	private double getsunriseTime( ){
-		
 		return minTemp;
 	}
 	
 	private double getsunsetTime( ){
-		
 		return sunsetTime;
 	}
 	
