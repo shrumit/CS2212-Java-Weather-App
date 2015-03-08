@@ -7,22 +7,22 @@ package ca.uwo.csd.cs2212.group5;
 public class MiscOperations {
 	
 	// for the conversion of wind directions
-	private double N = 0;
-	private double NNE = 22.5;
-	private double NE = 45;
-	private double ENE = 67.5;
-	private double E = 90;
-	private double ESE = 112.5;
-	private double SE = 135;
-	private double SSE = 157.5;
-	private double S = 180;
-	private double SSW = 202.5;
-	private double SW = 225;
-	private double WSW = 247.5;
-	private double W = 270;
-	private double WNW = 292.5;
-	private double NW = 315;
-	private double NNW = 338;
+	private static double N = 0;
+	private static double NNE = 22.5;
+	private static double NE = 45;
+	private static double ENE = 67.5;
+	private static double E = 90;
+	private static double ESE = 112.5;
+	private static double SE = 135;
+	private static double SSE = 157.5;
+	private static double S = 180;
+	private static double SSW = 202.5;
+	private static double SW = 225;
+	private static double WSW = 247.5;
+	private static double W = 270;
+	private static double WNW = 292.5;
+	private static double NW = 315;
+	private static double NNW = 338;
 
 	// converts windspeed from m/s to km/h
 	public static double windConvert(double mps) {
