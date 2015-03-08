@@ -81,7 +81,6 @@ public class MiscOperations {
 			return "S";
 		} 
 		
-		
 		//SSW = 202.5 +- 11.25
 		else if (dir > (SSW - 11.25) && dir <= (SSW + 11.25) {
 			return "SSW";
