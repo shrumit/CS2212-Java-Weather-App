@@ -6,16 +6,16 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
+import java.awt.Font;
 
 public class GUI {
 
-	private JFrame frame;
-	private JTextField cname;
-	private JTextField ccode;
+	private JFrame frmWeatherApp;
+	private JTextField cityName;
+	private JTextField countryCode;
 	private URLReader ur;
 	private String displayString;
 	private JTextArea textArea;
-	
 
 	/**
 	 * Launch the application.
@@ -25,7 +25,7 @@ public class GUI {
 			public void run() {
 				try {
 					GUI window = new GUI();
-					window.frame.setVisible(true);
+					window.frmWeatherApp.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -44,46 +44,50 @@ public class GUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 475);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmWeatherApp = new JFrame();
+		frmWeatherApp.getContentPane().setFont(
+				new Font("SansSerif", Font.PLAIN, 13));
+		frmWeatherApp.setTitle("Weather App - Team 5 CS2212");
+		frmWeatherApp.setFont(new Font("SansSerif", Font.PLAIN, 12));
+		frmWeatherApp.getContentPane().setBackground(Color.GRAY);
+		frmWeatherApp.setBounds(100, 100, 450, 475);
+		frmWeatherApp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmWeatherApp.getContentPane().setLayout(null);
 
-		cname = new JTextField("city name");
-		cname.setBounds(10, 10, 202, 28);
-		frame.getContentPane().add(cname);
-		cname.setColumns(10);
+		cityName = new JTextField("city name");
+		cityName.setBounds(10, 10, 202, 28);
+		frmWeatherApp.getContentPane().add(cityName);
+		cityName.setColumns(10);
 
-		ccode = new JTextField("country code");
-		ccode.setBounds(217, 10, 111, 28);
-		frame.getContentPane().add(ccode);
-		ccode.setColumns(10);
+		countryCode = new JTextField("country code");
+		countryCode.setBounds(217, 10, 111, 28);
+		frmWeatherApp.getContentPane().add(countryCode);
+		countryCode.setColumns(10);
 
 		JButton btn = new JButton("Get");
 		btn.setBounds(340, 5, 90, 38);
-		frame.getContentPane().add(btn);
-		
+		frmWeatherApp.getContentPane().add(btn);
+
 		textArea = new JTextArea();
+		textArea.setFont(new Font("Tahoma", Font.BOLD, 15));
 		textArea.setBackground(Color.LIGHT_GRAY);
 		textArea.setBounds(10, 86, 410, 329);
-		frame.getContentPane().add(textArea);
+		frmWeatherApp.getContentPane().add(textArea);
 
 		btn.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent ae) {
-				try{
-					ur = new URLReader(cname.getText(), ccode.getText());
-					String displayString = ur.getCurrent(); 
-					
-				}
-				catch (WeatherException e){
+				try {
+					ur = new URLReader(cityName.getText(), countryCode.getText());
+					String displayString = ur.getCurrent();
+					textArea.setText(displayString);
+
+				} catch (WeatherException e) {
 					displayString = e.getMessage();
 				}
-				
+				//
 			}
-			
-			
-			
+
 		});
 	}
 }

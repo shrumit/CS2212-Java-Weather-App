@@ -5,4 +5,11 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>Group Project</name>
   <description>This is the Weather app that are developing for our group project</description>
+  <dependencies>
+  	<dependency>
+  		<groupId>org.json</groupId>
+  		<artifactId>json</artifactId>
+  		<version>20141113</version>
+  	</dependency>
+  </dependencies>
 </project>

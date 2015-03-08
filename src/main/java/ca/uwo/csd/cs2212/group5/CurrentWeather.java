@@ -17,7 +17,7 @@ public class CurrentWeather {
 
 	}
 
-	public void setTemperature(int value) {
+	public void setTemperature(double value) {
 		value = MiscOperations.tempToCelsius(value);
 		temperature = new Parameter("Temperature", "Celsius", value);
 	}
@@ -35,19 +35,22 @@ public class CurrentWeather {
 		airPressure = new Parameter("Air Pressure", "hPa", value);
 	}
 
-	public void setMinTemp(int value) {
+	public void setMinTemp(double value) {
 		value = MiscOperations.tempToCelsius(value);
-		minTemp = new Parameter("Minimum Temperature", "Celsius", value);
+		minTemp = new Parameter("Min Temp", "Celsius", value);
 	}
 
-	public void setMaxTemp(int value) {
+	public void setMaxTemp(double value) {
 		value = MiscOperations.tempToCelsius(value);
-		maxTemp = new Parameter("Maximum Temperature", "Celsius", value);
+		maxTemp = new Parameter("Max Temp", "Celsius", value);
+	}
+	
+	public void setWindDir(int value) {
+		String dir = MiscOperations.convertWindDir(value);
+		windDirection = new Parameter ("Wind Direction", dir);
 	}
 
 	public String toString() {
-		
-		
 		return (temperature.toString() + "\n" + humidity.toString() + "\n"
 				+ windSpeed.toString() + "\n" + windDirection.toString() + "\n"
 				+ airPressure.toString() + "\n" + minTemp.toString() + "\n" + maxTemp

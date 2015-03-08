@@ -12,6 +12,11 @@ public class URLReader {
 
 	private static final String urlPrefix = "http://api.openweathermap.org/data/2.5/weather?q=";
 	private CurrentWeather cw;
+	
+//	public static void main (String[] args) throws WeatherException{
+//		URLReader urly = new URLReader("London", "CA");
+//		System.out.println(urly.getCurrent());
+//	}
 
 	public URLReader(String city, String country) throws WeatherException {
 
@@ -25,7 +30,7 @@ public class URLReader {
 	private void fetchJson() throws WeatherException {
 
 		String url = urlPrefix + city + "," + country;
-		System.out.println(url);
+//		System.out.println(url);
 		String jsonDerulo = "";
 
 		try {
@@ -35,6 +40,7 @@ public class URLReader {
 
 			jsonDerulo = in.readLine();
 			in.close();
+			
 
 		} catch (Exception e) {
 			throw new WeatherException("Error fetching json.");
@@ -49,7 +55,7 @@ public class URLReader {
 	private void parseJson() throws WeatherException
 
 	{
-		try {
+//		try {
 
 			cw = new CurrentWeather();
 
@@ -57,24 +63,22 @@ public class URLReader {
 			JSONObject main = mainObject.getJSONObject("main");
 			JSONObject sys = mainObject.getJSONObject("sys");
 
-			cw.setTemperature(Integer.parseInt((main.getString(new String(
-					"temp")))));
-			cw.setHumidity(Integer.parseInt((main.getString(new String(
-					"humidity")))));
-			cw.setMinTemp(Integer.parseInt((main.getString(new String(
-					"temp_min")))));
-			cw.setMaxTemp(Integer.parseInt((main.getString(new String(
-					"temp_max")))));
-			cw.setPressure(Integer.parseInt((main.getString(new String(
-					"pressure")))));
+//			System.out.println(main.get("temp").toString());
+			
+			cw.setTemperature(Double.parseDouble((main.get("temp").toString())));
+			
+			cw.setHumidity(Integer.parseInt((main.get("humidity").toString())));
+			cw.setMinTemp(Double.parseDouble((main.get("temp_min").toString())));
+			cw.setMaxTemp(Double.parseDouble((main.get("temp_max").toString())));
+			cw.setPressure(Integer.parseInt((main.get("pressure").toString())));
 
 			JSONObject wind = mainObject.getJSONObject("wind");
-			cw.setWindSpeed(Integer.parseInt((wind
-					.getString(new String("speed")))));
+			cw.setWindSpeed(Double.parseDouble((wind.get("speed").toString())));
+			cw.setWindDir(Integer.parseInt((wind.get("deg").toString())));
 
-		} catch (Exception e) {
-			throw new WeatherException("Error parsing JSON.");
-		}
+//		} catch (Exception e) {
+//			throw new WeatherException("Error parsing JSON.");
+//		}
 
 	}
 
