@@ -28,6 +28,9 @@ public abstract class AbstractLocalWeather{
   	/** gets the current time **/
   	abstract private double getTime();
   	
+  	/** gets the current temperature **/
+  	abstract private double getTemp();
+  	
   	/** gets the local minimum temperature **/
   	abstract private double getminTemp();
   	
