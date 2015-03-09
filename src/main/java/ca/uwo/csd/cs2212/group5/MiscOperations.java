@@ -1,9 +1,12 @@
-/**
- * 
- */
-
 package ca.uwo.csd.cs2212.group5;
 
+/**
+ * This static class provides various conversion operations for the data
+ * retrieved from the API.
+ * 
+ * @author Team 5
+ *
+ */
 public class MiscOperations {
 
 	// for the conversion of wind directions
@@ -24,17 +27,34 @@ public class MiscOperations {
 	private static double NW = 315;
 	private static double NNW = 338;
 
-	// converts windspeed from m/s to km/h
-	public static double windConvert(double mps) {
-		return mps * 3.6;
+	/**
+	 * Converts wind speed from m/s to km/h
+	 * 
+	 * @param mps
+	 *            is wind speed in m/s
+	 * @return wind speed in km/h
+	 */
+	public static int windConvert(int mps) {
+		return (int) (mps * 3.6);
 	}
 
-	// converts from kelvin to celsius
-	public static double tempToCelsius(double kelvin) {
-		return (kelvin - 273.15);
+	/**
+	 * Converts temperature from Kelvin to Celsius
+	 * 
+	 * @param kelvin
+	 *            is temperature in Kelvin
+	 * @return the temperature in Celsius
+	 */
+	public static int tempToCelsius(int kelvin) {
+		return (int) (kelvin - 273.15);
 	}
 
-	// converts a direction double to a string value indicating the direction
+	/**
+	 * 
+	 * @param dir
+	 *            is wind direction in degrees
+	 * @return String storing letter representing wind direction
+	 */
 	public static String convertWindDir(double dir) {
 		// N = 0/360 +- 11.25
 		if (dir >= (NNW + 11.25) && dir <= 360 || dir >= 0
