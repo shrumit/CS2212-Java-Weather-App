@@ -29,7 +29,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>ca.uwo.csd.cs2212.USERNAME.App</mainClass>
+							<mainClass>ca.uwo.csd.cs2212.team5.App</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
@@ -45,7 +45,7 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>ca.uwo.csd.cs2212.USERNAME.App</mainClass>
+							<mainClass>ca.uwo.csd.cs2212.team5.App</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
