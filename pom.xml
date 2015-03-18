@@ -29,7 +29,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>ca.uwo.csd.cs2212.SMEHTA64.App</mainClass>
+							<mainClass>ca.uwo.csd.cs2212.USERNAME.App</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
