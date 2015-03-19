@@ -1,13 +1,10 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
-
+<project>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>ca.uwo.csd.cs2212.group5.app</groupId>
 	<artifactId>cs2212group5</artifactId>
 	<version>0.5</version>
 	<name>Group Project</name>
-	<description>This is the Weather app that are developing for our group project</description>
+	<description>This is a Weather app that are developing for our group project</description>
 
 
 
@@ -24,19 +21,6 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.3</version>
-				<configuration>
-					<archive>
-						<manifest>
-							<mainClass>ca.uwo.csd.cs2212.SMEHTA64.App</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>2.5.3</version>
 				<configuration>
@@ -45,7 +29,7 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>ca.uwo.csd.cs2212.USERNAME.App</mainClass>
+							<mainClass>ca.uwo.csd.cs2212.group5.GUI</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
