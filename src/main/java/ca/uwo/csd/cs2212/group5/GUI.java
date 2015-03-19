@@ -66,13 +66,13 @@ public class GUI {
 		frmWeatherApp.getContentPane().add(cityName);
 		cityName.setColumns(10);
 
-		// text field for country code
+		//text field for country code
 		countryCode = new JTextField("country code");
 		countryCode.setBounds(226, 100, 111, 28);
 		frmWeatherApp.getContentPane().add(countryCode);
 		countryCode.setColumns(10);
 
-		// button to fetch data from API
+		//button to fetch data from API
 		JButton btn = new JButton("Get");
 		btn.setBounds(350, 95, 70, 38);
 		frmWeatherApp.getContentPane().add(btn);
@@ -82,13 +82,20 @@ public class GUI {
 		textArea.setBackground(Color.LIGHT_GRAY);
 		textArea.setBounds(10, 169, 410, 246);
 		frmWeatherApp.getContentPane().add(textArea);
+		
+		JToggleButton tglbtnFarhenheit = new JToggleButton("Farhenheit");
+		tglbtnFarhenheit.setBounds(12, 13, 93, 25);
+		frmWeatherApp.getContentPane().add(tglbtnFarhenheit);
+		
+		JToggleButton tglbtnCelsius = new JToggleButton("Celsius");
+		tglbtnCelsius.setBounds(104, 13, 93, 25);
+		frmWeatherApp.getContentPane().add(tglbtnCelsius);
 
 		btn.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent ae) {
 				try {
-					ur = new URLReader(cityName.getText(), countryCode
-							.getText());
+					ur = new URLReader(cityName.getText(), countryCode.getText());
 					displayString = ur.getCurrent();
 					textArea.setText(displayString);
 
