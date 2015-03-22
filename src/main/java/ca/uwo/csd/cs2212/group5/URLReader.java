@@ -126,9 +126,9 @@ public class URLReader {
 	 * @return a string that contains all data, formatted.
 	 */
 	public String getCurrent() {
-
 		return cw.toString();
-
 	}
+	
+	
 
 }

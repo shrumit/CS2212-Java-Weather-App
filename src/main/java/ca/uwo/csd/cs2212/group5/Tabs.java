@@ -1,20 +1,24 @@
 package ca.uwo.csd.cs2212.group5;
 
-import javax.swing.*;
+import java.awt.Container;
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemListener;
-import java.awt.Color;
-import java.awt.Font;
 
-/**
- * Implements the GUI. Also houses the main method for the program.
- * 
- * @author Team 5
- *
- */
-public class GUI {
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JTree;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import javax.swing.JTextPane;
+
+public class Tabs {
 
 	private JFrame frame;
 	private JTextField cityName;
@@ -30,7 +34,7 @@ public class GUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GUI window = new GUI();
+					Tabs window = new Tabs();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +46,7 @@ public class GUI {
 	/**
 	 * Create the application.
 	 */
-	public GUI() {
+	public Tabs() {
 		initialize();
 	}
 
@@ -51,14 +55,31 @@ public class GUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.getContentPane().setFont(
-				new Font("SansSerif", Font.PLAIN, 13));
-		frame.setTitle("Weather App - Team 5 CS2212");
-		frame.setFont(new Font("SansSerif", Font.PLAIN, 12));
-		frame.getContentPane().setBackground(Color.GRAY);
-		frame.setBounds(100, 100, 450, 475);
+		frame.setBounds(100, 100, 475, 550);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(12, 137, 415, 308);
+		frame.getContentPane().add(tabbedPane);
+
+		JTextPane cPane = new JTextPane();
+		cPane.setText("Current");
+		tabbedPane.addTab("Current", null, cPane, null);
+
+		JTextPane sPane = new JTextPane();
+		sPane.setText("Short");
+		tabbedPane.addTab("Short Term", null, sPane, null);
+
+		JTextPane lPane = new JTextPane();
+		lPane.setText("Long");
+		tabbedPane.addTab("Long Term", null, lPane, null);
+
+		JMenuBar menuBar = new JMenuBar();
+		frame.setJMenuBar(menuBar);
+
+		JMenu mnProgram = new JMenu("Program");
+		menuBar.add(mnProgram);
 
 		// text field for city name
 		cityName = new JTextField("city name");
@@ -77,27 +98,6 @@ public class GUI {
 		getButton.setBounds(350, 95, 70, 38);
 		frame.getContentPane().add(getButton);
 
-		textArea = new JTextArea();
-		textArea.setFont(new Font("Tahoma", Font.BOLD, 15));
-		textArea.setBackground(Color.LIGHT_GRAY);
-		textArea.setBounds(10, 169, 410, 246);
-		frame.getContentPane().add(textArea);
-		
-		JButton unitButton = new JButton("Change Units");
-		
-		unitButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		unitButton.setBounds(12, 131, 123, 25);
-		frame.getContentPane().add(unitButton);
-		
-//		ButtonGroup group = new ButtonGroup();
-//		group.add(rdFarh);
-//		group.add(rdCels);
-		
-		//end of radio
-
 		getButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent ae) {
@@ -105,7 +105,7 @@ public class GUI {
 					ur = new URLReader(cityName.getText(), countryCode
 							.getText());
 					displayString = ur.getCurrent();
-					textArea.setText(displayString);
+					cPane.setText(displayString);
 
 				} catch (WeatherException e) {
 					displayString = e.getMessage();
@@ -114,14 +114,13 @@ public class GUI {
 			}
 
 		});
-			
-	}
-	private class SwingAction extends AbstractAction {
-		public SwingAction() {
-			putValue(NAME, "SwingAction");
-			putValue(SHORT_DESCRIPTION, "Some short description");
-		}
-		public void actionPerformed(ActionEvent e) {
-		}
+
+		JMenuItem mntmExit = new JMenuItem("Exit");
+		mntmExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		mnProgram.add(mntmExit);
 	}
 }

@@ -1,5 +1,7 @@
 package ca.uwo.csd.cs2212.group5;
 
+import java.awt.Image;
+
 /**
  * This class constructs an object storing various weather data. The data is
  * stored in objects of the Parameter class. Time is stored in objects of the
@@ -21,6 +23,8 @@ public class CurrentWeather {
 	private Time riseTime;
 	private Time setTime;
 	private Time time;
+	private Image condition;
+	private String description;
 
 	public CurrentWeather() {
 
