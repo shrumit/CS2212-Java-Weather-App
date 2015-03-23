@@ -1,6 +1,13 @@
 package ca.uwo.csd.cs2212.group5;
 
 import java.awt.Image;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.util.Calendar;
+import java.util.TimeZone;
+
+import org.json.JSONObject;
 
 /**
  * This class constructs an object storing various weather data. The data is
@@ -20,11 +27,23 @@ public class CurrentWeather {
 	private Parameter airPressure;
 	private Parameter minTemp;
 	private Parameter maxTemp;
-	private Time riseTime;
-	private Time setTime;
-	private Time time;
+	private Calendar sunrise = Calendar.getInstance(TimeZone
+			.getTimeZone("America/Toronto"));
+	private Calendar sunset = Calendar.getInstance(TimeZone
+			.getTimeZone("America/Toronto"));
+	// private Calendar time =
+	// Calendar.getInstance(TimeZone.getTimeZone("America/Toronto"));
 	private Image condition;
 	private String description;
+
+	private double longi;
+	private double latti;
+	
+	private JSONObject tzJson;
+	private static final String timezoneUrl1 = "https://maps.googleapis.com/maps/api/timezone/json?location=";
+	private static final String timezoneUrl2 = "&timestamp=0";
+	private String timezone;
+
 
 	public CurrentWeather() {
 
@@ -112,8 +131,61 @@ public class CurrentWeather {
 	public String toString() {
 		return (temperature.toString() + "\n" + humidity.toString() + "\n"
 				+ windSpeed.toString() + "\n" + windDirection.toString() + "\n"
-				+ airPressure.toString() + "\n" + minTemp.toString() + "\n" + maxTemp
-					.toString());
+				+ airPressure.toString() + "\n" + minTemp.toString() + "\n"
+				+ maxTemp.toString() + "\n" + "Description: \t\t" + description
+				+ "\n" + "Sunrise: \t\t" + MiscOperations.displayTime(sunrise)
+				+ "\n" + "Sunset: \t\t" + MiscOperations.displayTime(sunset));
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 
 	}
+
+	public void setSunset(long sunset) {
+		this.sunset.setTimeInMillis(sunset * 1000);
+	}
+
+	public void setSunrise(long sunrise) {
+		this.sunrise.setTimeInMillis(sunrise * 1000);
+	}
+
+	public void setCoord(double longitude, double lattitude) {
+		this.longi = longitude;
+		this.latti = lattitude;
+
+	}
+
+	/**
+	 * Determines the timezone of this city based on longitude and lattitude.
+	 * Uses Google's Timezone API.
+	 * The local timezone is needed in order to properly display sunset/sunrise time.
+	 * 
+	 * @throws WeatherException
+	 */
+	public void determineTimezone() throws WeatherException {
+		String url = timezoneUrl1 + longi + "," + latti + timezoneUrl2;
+		String jsonText;
+
+		try {
+			URL tzone = new URL(url);
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					tzone.openStream()));
+
+			jsonText = in.readLine();
+			in.close();
+
+		} catch (Exception e) {
+			throw new WeatherException("Error fetching timezone.");
+		}
+
+		tzJson = new JSONObject(jsonText);
+		timezone = tzJson.getString("timeZoneId");
+
+		sunrise = Calendar.getInstance(TimeZone.getTimeZone(timezone));
+		sunset = Calendar.getInstance(TimeZone.getTimeZone(timezone));
+
+	}
+
+
 }

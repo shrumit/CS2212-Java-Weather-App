@@ -2,6 +2,8 @@ package ca.uwo.csd.cs2212.group5;
 
 import java.net.*;
 import java.io.*;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -90,34 +92,53 @@ public class URLReader {
 						// to int (for display)
 
 		JSONObject mainObject = new JSONObject(jsString);
-		JSONObject main = mainObject.getJSONObject("main");
 		JSONObject sys = mainObject.getJSONObject("sys");
+		JSONArray weatherArray = mainObject.getJSONArray("weather");
+		JSONObject weather = weatherArray.getJSONObject(0);
+		JSONObject main = mainObject.getJSONObject("main");
+		JSONObject wind = mainObject.getJSONObject("wind");
+		JSONObject coord = mainObject.getJSONObject("coord");
 
-		// System.out.println(main.get("temp").toString());
-
-		tempInt = (int) Double.parseDouble((main.get("temp").toString()));
+		// Coordinates (to set timezone)
+		cw.setCoord(Double.parseDouble(coord.get("lon").toString()) , Double.parseDouble(coord.get("lat").toString()));
+		
+		// Temperature
+		tempInt = (int) Double.parseDouble(main.get("temp").toString());
 		cw.setTemperature(tempInt);
 
-		tempInt = (int) Double.parseDouble((main.get("temp_min").toString()));
+		// Minimum Temperature
+		tempInt = (int) Double.parseDouble(main.get("temp_min").toString());
 		cw.setMinTemp(tempInt);
 
-		tempInt = (int) Double.parseDouble((main.get("temp_max").toString()));
+		// Maximum Temperature
+		tempInt = (int) Double.parseDouble(main.get("temp_max").toString());
 		cw.setMaxTemp(tempInt);
 
-		cw.setHumidity(Integer.parseInt((main.get("humidity").toString())));
-		cw.setPressure(Integer.parseInt((main.get("pressure").toString())));
+		// Humidity
+		tempInt = (int) Double.parseDouble(main.get("humidity").toString());
+		cw.setHumidity(tempInt);
+		
+		// Air Pressure
+		tempInt = (int) Double.parseDouble(main.get("pressure").toString());
+		cw.setPressure(tempInt);
 
-		JSONObject wind = mainObject.getJSONObject("wind");
-
-		tempInt = (int) Double.parseDouble((wind.get("speed").toString()));
+		// Wind Speed
+		tempInt = (int) Double.parseDouble(wind.get("speed").toString());
 		cw.setWindSpeed(tempInt);
 
-		cw.setWindDir(Integer.parseInt((wind.get("deg").toString())));
+		// Wind Direction
+		tempInt = (int) Double.parseDouble(wind.get("deg").toString());
+		cw.setWindDir(tempInt);
 
-		// } catch (Exception e) {
-		// throw new WeatherException("Error parsing JSON.");
-		// }
+		// Condition Description
+		cw.setDescription(weather.get("description").toString());
 
+		// Sunset Time
+		cw.setSunset(Long.parseLong(sys.get("sunset").toString()));
+		
+		// Sunrise Time
+		cw.setSunrise(Long.parseLong(sys.get("sunrise").toString()));
+		
 	}
 
 	/**
@@ -128,7 +149,5 @@ public class URLReader {
 	public String getCurrent() {
 		return cw.toString();
 	}
-	
-	
 
 }

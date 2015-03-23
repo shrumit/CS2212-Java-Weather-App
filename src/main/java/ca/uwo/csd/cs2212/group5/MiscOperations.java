@@ -1,5 +1,7 @@
 package ca.uwo.csd.cs2212.group5;
 
+import java.util.Calendar;
+
 /**
  * This static class provides various conversion operations for the data
  * retrieved from the API.
@@ -48,6 +50,18 @@ public class MiscOperations {
 	public static int tempToCelsius(int kelvin) {
 		return (int) (kelvin - 273.15);
 	}
+	
+
+	/**
+	 * Takes Calendar object and returns a String of format HH : MM
+	 * 
+	 * @param time is Calendar object representing time
+	 * @return String representation of time
+	 */
+	public static String displayTime(Calendar time) {
+		return (time.get(Calendar.HOUR) + " : " + time.get(Calendar.MINUTE));
+	}
+
 
 	/**
 	 * 
@@ -141,4 +155,5 @@ public class MiscOperations {
 			return "error";
 
 	}
+
 }
