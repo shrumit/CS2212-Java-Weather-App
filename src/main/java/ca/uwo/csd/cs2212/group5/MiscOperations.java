@@ -59,7 +59,10 @@ public class MiscOperations {
 	 * @return String representation of time
 	 */
 	public static String displayTime(Calendar time) {
-		return (time.get(Calendar.HOUR) + " : " + time.get(Calendar.MINUTE));
+		String hour = String.format("%02d", time.get(Calendar.HOUR));
+		String minute = String.format("%02d", time.get(Calendar.MINUTE));
+		
+		return (hour + " : " + minute);
 	}
 
 

@@ -17,15 +17,23 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JTextPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.Box;
 
 public class Tabs {
 
-	private JFrame frame;
-	private JTextField cityName;
-	private JTextField countryCode;
-	private URLReader ur;
-	private JTextArea textArea;
-	private String displayString;
+	private static JFrame frame;
+	private static JTextField cityName;
+	private static JTextField countryCode;
+	private static URLReader ur;
+	private static JTextArea textArea;
+	
+	private static JTextPane cPane;
+	private static JTextPane sPane;
+	private static JTextPane lPane;
+
+//	private String displayString;
 
 	/**
 	 * Launch the application.
@@ -53,25 +61,25 @@ public class Tabs {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private static void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 475, 550);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(12, 137, 415, 308);
+		tabbedPane.setBounds(12, 137, 433, 323);
 		frame.getContentPane().add(tabbedPane);
 
-		JTextPane cPane = new JTextPane();
+		cPane = new JTextPane();
 		cPane.setText("Current");
 		tabbedPane.addTab("Current", null, cPane, null);
 
-		JTextPane sPane = new JTextPane();
+		sPane = new JTextPane();
 		sPane.setText("Short");
 		tabbedPane.addTab("Short Term", null, sPane, null);
 
-		JTextPane lPane = new JTextPane();
+		lPane = new JTextPane();
 		lPane.setText("Long");
 		tabbedPane.addTab("Long Term", null, lPane, null);
 
@@ -104,11 +112,12 @@ public class Tabs {
 				try {
 					ur = new URLReader(cityName.getText(), countryCode
 							.getText());
-					displayString = ur.getCurrent();
-					cPane.setText(displayString);
+
+					refreshData();
 
 				} catch (WeatherException e) {
-					displayString = e.getMessage();
+				} catch (Exception e) {
+
 				}
 				//
 			}
@@ -122,5 +131,16 @@ public class Tabs {
 			}
 		});
 		mnProgram.add(mntmExit);
+	}
+
+	private static void refreshData() {
+		
+		// Displays Current Weather
+		String displayString = ur.getCurrent();
+		cPane.setText(displayString);
+		
+		// Displays Short Term Weather
+		
+
 	}
 }

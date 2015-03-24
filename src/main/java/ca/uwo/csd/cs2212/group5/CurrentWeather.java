@@ -38,12 +38,11 @@ public class CurrentWeather {
 
 	private double longi;
 	private double latti;
-	
+
 	private JSONObject tzJson;
 	private static final String timezoneUrl1 = "https://maps.googleapis.com/maps/api/timezone/json?location=";
 	private static final String timezoneUrl2 = "&timestamp=0";
 	private String timezone;
-
 
 	public CurrentWeather() {
 
@@ -132,7 +131,7 @@ public class CurrentWeather {
 		return (temperature.toString() + "\n" + humidity.toString() + "\n"
 				+ windSpeed.toString() + "\n" + windDirection.toString() + "\n"
 				+ airPressure.toString() + "\n" + minTemp.toString() + "\n"
-				+ maxTemp.toString() + "\n" + "Description: \t\t" + description
+				+ maxTemp.toString() + "\n" + "Conditions: \t\t" + description
 				+ "\n" + "Sunrise: \t\t" + MiscOperations.displayTime(sunrise)
 				+ "\n" + "Sunset: \t\t" + MiscOperations.displayTime(sunset));
 	}
@@ -150,42 +149,60 @@ public class CurrentWeather {
 		this.sunrise.setTimeInMillis(sunrise * 1000);
 	}
 
-	public void setCoord(double longitude, double lattitude) {
+	public void setCoord(double longitude, double lattitude) throws Exception {
 		this.longi = longitude;
 		this.latti = lattitude;
+
+		System.out.println(longi + "," + latti);
+
+		determineTimezone();
 
 	}
 
 	/**
 	 * Determines the timezone of this city based on longitude and lattitude.
-	 * Uses Google's Timezone API.
-	 * The local timezone is needed in order to properly display sunset/sunrise time.
+	 * Uses Google's Timezone API. The local timezone is needed in order to
+	 * properly display (local) sunset/sunrise time.
 	 * 
 	 * @throws WeatherException
 	 */
-	public void determineTimezone() throws WeatherException {
-		String url = timezoneUrl1 + longi + "," + latti + timezoneUrl2;
-		String jsonText;
+	public void determineTimezone() throws Exception {
+		String url = timezoneUrl1 + latti + "," + longi + timezoneUrl2;
 
-		try {
-			URL tzone = new URL(url);
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					tzone.openStream()));
+//		System.out.println(url);
 
-			jsonText = in.readLine();
-			in.close();
+		StringBuilder jsonText = new StringBuilder();
 
-		} catch (Exception e) {
-			throw new WeatherException("Error fetching timezone.");
+		// try {
+		URL tzone = new URL(url);
+		BufferedReader in = new BufferedReader(new InputStreamReader(
+				tzone.openStream()));
+
+		String temp = "";
+		while ((temp = in.readLine()) != null) {
+			jsonText.append(temp);
 		}
+		in.close();
 
-		tzJson = new JSONObject(jsonText);
+		// } catch (Exception e) {
+		// throw new WeatherException("Error fetching timezone.");
+		// }
+
+//		System.out.println(jsonText.toString());
+		
+		tzJson = new JSONObject(jsonText.toString());
 		timezone = tzJson.getString("timeZoneId");
 
+//		System.out.println(timezone);
+
+		// initializes both Calendar objects according to local timezone
 		sunrise = Calendar.getInstance(TimeZone.getTimeZone(timezone));
 		sunset = Calendar.getInstance(TimeZone.getTimeZone(timezone));
 
 	}
-
+	
+	public String getTimezone(){
+		return timezone;
+	}
 
 }
