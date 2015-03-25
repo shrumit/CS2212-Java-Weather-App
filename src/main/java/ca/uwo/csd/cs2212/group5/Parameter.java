@@ -55,6 +55,10 @@ public class Parameter {
 		return type;
 	}
 
+	public int getValue() {
+		return value;
+	}
+
 	/**
 	 * Returns a formatted toString containing all three data fields
 	 */

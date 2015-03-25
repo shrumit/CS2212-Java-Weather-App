@@ -67,27 +67,41 @@ public class Tabs {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
+		//TABS
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(12, 137, 433, 323);
 		frame.getContentPane().add(tabbedPane);
 
+		// Current Weather Tab
 		cPane = new JTextPane();
 		cPane.setText("Current");
 		tabbedPane.addTab("Current", null, cPane, null);
 
+		// Short Term Weather Tab
 		sPane = new JTextPane();
 		sPane.setText("Short");
 		tabbedPane.addTab("Short Term", null, sPane, null);
 
+		// Long Term Weather Tab
 		lPane = new JTextPane();
 		lPane.setText("Long");
 		tabbedPane.addTab("Long Term", null, lPane, null);
 
+		// This is the menu bar item "Program"
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
-
 		JMenu mnProgram = new JMenu("Program");
 		menuBar.add(mnProgram);
+		
+		// Implements Program>Exit on the menu bar
+		JMenuItem mntmExit = new JMenuItem("Exit");
+		mntmExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		mnProgram.add(mntmExit);
+
 
 		// text field for city name
 		cityName = new JTextField("city name");
@@ -106,6 +120,7 @@ public class Tabs {
 		getButton.setBounds(350, 95, 70, 38);
 		frame.getContentPane().add(getButton);
 
+		// What happens once Get button is pressed
 		getButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent ae) {
@@ -123,23 +138,22 @@ public class Tabs {
 			}
 
 		});
+		
 
-		JMenuItem mntmExit = new JMenuItem("Exit");
-		mntmExit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
-		mnProgram.add(mntmExit);
 	}
 
+	/**
+	 * Gets data strings from URLReader object and puts it on displayString.
+	 * <Note that .setText may not be the best way to implement this>
+	 * 
+	 */
 	private static void refreshData() {
 		
 		// Displays Current Weather
 		String displayString = ur.getCurrent();
 		cPane.setText(displayString);
 		
-		// Displays Short Term Weather
+		// Displays Short Term Weather <unfinished>
 		
 
 	}

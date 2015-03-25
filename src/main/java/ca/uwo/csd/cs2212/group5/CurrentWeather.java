@@ -31,10 +31,14 @@ public class CurrentWeather {
 			.getTimeZone("America/Toronto"));
 	private Calendar sunset = Calendar.getInstance(TimeZone
 			.getTimeZone("America/Toronto"));
+	
 	// private Calendar time =
 	// Calendar.getInstance(TimeZone.getTimeZone("America/Toronto"));
 	private Image condition;
 	private String description;
+	
+	private static final Parameter nullParam = new Parameter("Error", "Error", 0);
+
 
 	private double longi;
 	private double latti;
@@ -44,7 +48,13 @@ public class CurrentWeather {
 	private static final String timezoneUrl2 = "&timestamp=0";
 	private String timezone;
 
+	/**
+	 * Initializes everything to null.
+	 */
 	public CurrentWeather() {
+		
+		temperature = humidity = windSpeed = windDirection = airPressure = minTemp = maxTemp = nullParam;
+		description = "";
 
 	}
 
@@ -127,14 +137,6 @@ public class CurrentWeather {
 	/**
 	 * Outputs data from all the variables as a single string.
 	 */
-	public String toString() {
-		return (temperature.toString() + "\n" + humidity.toString() + "\n"
-				+ windSpeed.toString() + "\n" + windDirection.toString() + "\n"
-				+ airPressure.toString() + "\n" + minTemp.toString() + "\n"
-				+ maxTemp.toString() + "\n" + "Conditions: \t\t" + description
-				+ "\n" + "Sunrise: \t\t" + MiscOperations.displayTime(sunrise)
-				+ "\n" + "Sunset: \t\t" + MiscOperations.displayTime(sunset));
-	}
 
 	public void setDescription(String description) {
 		this.description = description;
@@ -205,4 +207,12 @@ public class CurrentWeather {
 		return timezone;
 	}
 
+	public String toString() {
+		return (temperature.toString() + "\n" + humidity.toString() + "\n"
+				+ windSpeed.toString() + "\n" + windDirection.toString() + "\n"
+				+ airPressure.toString() + "\n" + minTemp.toString() + "\n"
+				+ maxTemp.toString() + "\n" + "Conditions: \t\t" + description
+				+ "\n" + "Sunrise: \t\t" + MiscOperations.displayTime(sunrise)
+				+ "\n" + "Sunset: \t\t" + MiscOperations.displayTime(sunset));
+	}
 }

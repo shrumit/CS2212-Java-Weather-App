@@ -33,7 +33,7 @@ public class URLReader {
 
 	private CurrentWeather cw;
 	private ShortTerm[] st = new ShortTerm[8];
-//	private LongTerm[] lt = new LongTerm[5];
+	private LongTerm[] lt = new LongTerm[5];
 
 	// public static void main (String[] args) throws WeatherException{
 	// URLReader urly = new URLReader("London", "CA");
@@ -121,7 +121,6 @@ public class URLReader {
 		cw = new CurrentWeather();
 
 		int tempInt; // intermediate variable for casting double (given by api)
-						// to int (for display)
 
 		JSONObject mainObject = new JSONObject(currentJson);
 		JSONObject sys = mainObject.getJSONObject("sys");
@@ -171,16 +170,16 @@ public class URLReader {
 
 		// Sunrise Time
 		cw.setSunrise(Long.parseLong(sys.get("sunrise").toString()));
-//		System.out.println("temp");
+		// System.out.println("temp");
 
 	}
 
-	public void parseST() //throws NumberFormatException,Exception 
+	public void parseST() // throws NumberFormatException,Exception
 	{
 
 		JSONObject mainObject = new JSONObject(shortTermJson);
 		JSONArray listArray = mainObject.getJSONArray("list");
-
+		
 		for (int i = 0; i < 8; i++) {
 			JSONObject thisTime = listArray.getJSONObject(i);
 			JSONObject main = thisTime.getJSONObject("main");
@@ -192,22 +191,55 @@ public class URLReader {
 			// Temperature
 			int tempInt = (int) Double.parseDouble(main.get("temp").toString());
 			st[i].setTemp(tempInt);
-
+			
 			// Condition Description
 			st[i].setDescription(weather.get("description").toString());
 			
 		}
-//		System.out.println("herenow");
 
 	}
+
+	public void parseLT() {
+		JSONObject mainObject = new JSONObject(shortTermJson);
+		JSONArray listArray = mainObject.getJSONArray("list");
+
+		for (int i = 0; i < 5; i++) {
+			JSONObject thisTime = listArray.getJSONObject(i);
+			JSONObject main = thisTime.getJSONObject("main");
+			JSONArray weatherArray = thisTime.getJSONArray("weather");
+			JSONObject weather = weatherArray.getJSONObject(0);
+			
+			lt[i] = new LongTerm();
+			
+			// Temperature
+			int tempInt = (int) Double.parseDouble(main.get("temp").toString());
+			lt[i].setTemp(tempInt);
+			
+			// Condition Description
+			lt[i].setDescription(weather.get("description").toString());
+			
+			// Minimum Temperature
+			tempInt = (int) Double.parseDouble(main.get("temp_min").toString());
+			lt[i].setMinTemp(tempInt);
+			
+			// Maximum Temperature
+			tempInt = (int) Double.parseDouble(main.get("temp_max").toString());
+			lt[i].setMaxTemp(tempInt);
+		}
+	}
 	
-//	public void parseLT()  throws NumberFormatException, JSONException,
-//	Exception {
-//		JSONObject mainObject = new JSONObject(longTermJson);
-//		JSONArray listArray = mainObject.getJSONArray("list");
-//		
-//		for(int i = 0; i < 5)
-//	}
+	public void parseMars()
+	{
+		
+	}
+
+	// public void parseLT() throws NumberFormatException, JSONException,
+	// Exception {
+	// JSONObject mainObject = new JSONObject(longTermJson);
+	// JSONArray listArray = mainObject.getJSONArray("list");
+	//
+	// for(int i = 0; i < 5)
+	// }
 
 	/**
 	 * Returns the data stored by cw as a single string.
