@@ -20,6 +20,8 @@ import javax.swing.JTextPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.Box;
+import java.awt.Font;
+import java.awt.Color;
 
 public class Tabs {
 
@@ -28,12 +30,14 @@ public class Tabs {
 	private static JTextField countryCode;
 	private static URLReader ur;
 	private static JTextArea textArea;
-	
+
 	private static JTextPane cPane;
 	private static JTextPane sPane;
 	private static JTextPane lPane;
+	private static JTextPane textPane_1;
 
-//	private String displayString;
+	private static Location city;
+	// private String displayString;
 
 	/**
 	 * Launch the application.
@@ -58,41 +62,72 @@ public class Tabs {
 		initialize();
 	}
 
+	private static final int width = 1000;
+	private static final int height = 700;
+	private static JTextPane[] sterms = new JTextPane[8];
+	private static JTextPane[] lterms = new JTextPane[5];
+
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private static void initialize() {
+
 		frame = new JFrame();
-		frame.setBounds(100, 100, 475, 550);
+		// frame.getContentPane().setBackground(new Color(1, 61, 134));
+		frame.setBounds(100, 100, width, height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
-		//TABS
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(12, 137, 433, 323);
-		frame.getContentPane().add(tabbedPane);
+		// for (int i = 0; i < 8; i++){
+		//
+		//
+		// sterms[i] = new JTextPane();
+		// sterms[i].setContentType("text/html");
+		// sterms[i].setBounds(width-200, (i*70)+20, 150, 70);
+		//
+		// sterms[i].setText(city.st[i].toString());
+		//
+		// // sterms[i].setBackground((Color.GRAY));
+		// frame.getContentPane().add(sterms[i]);
+		// }
 
-		// Current Weather Tab
-		cPane = new JTextPane();
-		cPane.setText("Current");
-		tabbedPane.addTab("Current", null, cPane, null);
-
-		// Short Term Weather Tab
-		sPane = new JTextPane();
-		sPane.setText("Short");
-		tabbedPane.addTab("Short Term", null, sPane, null);
-
-		// Long Term Weather Tab
-		lPane = new JTextPane();
-		lPane.setText("Long");
-		tabbedPane.addTab("Long Term", null, lPane, null);
+		// //TABS
+		// JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		// tabbedPane.setBounds(12, 137, 433, 323);
+		// tabbedPane.setFont(new Font("Calibri Light", Font.PLAIN, 20));
+		// frame.getContentPane().add(tabbedPane);
+		//
+		// // Current Weather Tab
+		// cPane = new JTextPane();
+		// cPane.setBackground(new Color(210, 229, 243));
+		// cPane.setText("Current");
+		// cPane.setContentType("text/html");
+		// tabbedPane.addTab("Current", null, cPane, null);
+		//
+		// // Short Term Weather Tab
+		// sPane = new JTextPane();
+		// sPane.setText("Short");
+		// sPane.setContentType("text/html");
+		// tabbedPane.addTab("Short Term", null, sPane, null);
+		//
+		// // Long Term Weather Tab
+		// lPane = new JTextPane();
+		// lPane.setText("Long");
+		// lPane.setContentType("text/html");
+		// tabbedPane.addTab("Long Term", null, lPane, null);
+		//
+		// textPane_1 = new JTextPane();
+		// tabbedPane.addTab("New tab", null, textPane_1, null);
+		// textPane_1.setText("Current");
+		// textPane_1.setContentType("text/html");
+		// textPane_1.setBackground(new Color(210, 229, 243));
 
 		// This is the menu bar item "Program"
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		JMenu mnProgram = new JMenu("Program");
 		menuBar.add(mnProgram);
-		
+
 		// Implements Program>Exit on the menu bar
 		JMenuItem mntmExit = new JMenuItem("Exit");
 		mntmExit.addActionListener(new ActionListener() {
@@ -102,35 +137,40 @@ public class Tabs {
 		});
 		mnProgram.add(mntmExit);
 
-
 		// text field for city name
 		cityName = new JTextField("city name");
-		cityName.setBounds(12, 100, 202, 28);
+		cityName.setBounds(12, 13, 202, 28);
 		frame.getContentPane().add(cityName);
 		cityName.setColumns(10);
 
 		// text field for country code
 		countryCode = new JTextField("country code");
-		countryCode.setBounds(226, 100, 111, 28);
+		countryCode.setBounds(227, 13, 111, 28);
 		frame.getContentPane().add(countryCode);
 		countryCode.setColumns(10);
 
 		// button to fetch data from API
 		JButton getButton = new JButton("Get");
-		getButton.setBounds(350, 95, 70, 38);
+		getButton.setBounds(351, 8, 70, 38);
 		frame.getContentPane().add(getButton);
+
+		JTextPane currentPane = new JTextPane();
+		currentPane.setBounds(12, 59, 575, 298);
+		frame.getContentPane().add(currentPane);
 
 		// What happens once Get button is pressed
 		getButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent ae) {
 				try {
-					ur = new URLReader(cityName.getText(), countryCode
-							.getText());
-
+					// ur = new URLReader(cityName.getText(), countryCode
+					// .getText());
+					//
+					// refreshData();
+					city = new Location(88319);
 					refreshData();
 
-				} catch (WeatherException e) {
+					// } catch (WeatherException e) {
 				} catch (Exception e) {
 
 				}
@@ -138,7 +178,6 @@ public class Tabs {
 			}
 
 		});
-		
 
 	}
 
@@ -148,13 +187,43 @@ public class Tabs {
 	 * 
 	 */
 	private static void refreshData() {
-		
+
 		// Displays Current Weather
-		String displayString = ur.getCurrent();
-		cPane.setText(displayString);
-		
+		// String displayString = ur.getCurrent();
+		// cPane.setText(displayString);
+		//
 		// Displays Short Term Weather <unfinished>
-		
+		displayShort();
+		displayLong();
 
 	}
+
+	private static void displayShort() {
+		for (int i = 0; i < 8; i++) {
+
+			sterms[i] = new JTextPane();
+			sterms[i].setContentType("text/html");
+			sterms[i].setBounds(width - 200, (i * 70) + 20, 150, 70);
+
+			sterms[i].setText(city.st[i].toString());
+
+			// sterms[i].setBackground((Color.GRAY));
+			frame.getContentPane().add(sterms[i]);
+		}
+
+	}
+	
+	private static void displayLong() {
+		for (int i = 0; i < 5; i++){
+			lterms[i] = new JTextPane();
+			lterms[i].setContentType("text/html");
+			lterms[i].setBounds(50+(i*100), height-120, 150, 100);
+			
+			lterms[i].setText(city.lt[i].toString());
+			
+			lterms[i].setBackground((Color.GRAY));
+			frame.getContentPane().add(lterms[i]);
+		}
+	}
+
 }

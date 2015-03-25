@@ -1,6 +1,11 @@
 package ca.uwo.csd.cs2212.group5;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.Calendar;
+
+import org.json.JSONObject;
 
 /**
  * This static class provides various conversion operations for the data
@@ -50,21 +55,83 @@ public class MiscOperations {
 	public static int tempToCelsius(int kelvin) {
 		return (int) (kelvin - 273.15);
 	}
-	
 
 	/**
 	 * Takes Calendar object and returns a String of format HH : MM
 	 * 
-	 * @param time is Calendar object representing time
+	 * @param time
+	 *            is Calendar object representing time
 	 * @return String representation of time
 	 */
 	public static String displayTime(Calendar time) {
 		String hour = String.format("%02d", time.get(Calendar.HOUR));
 		String minute = String.format("%02d", time.get(Calendar.MINUTE));
-		
+
 		return (hour + " : " + minute);
 	}
 
+	private static final String timezoneUrl1 = "https://maps.googleapis.com/maps/api/timezone/json?location=";
+	private static final String timezoneUrl2 = "&timestamp=0";
+
+	/**
+	 * Determines the timezone of this city based on longitude and lattitude.
+	 * Uses Google's Timezone API. The local timezone is needed in order to
+	 * properly display (local) sunset/sunrise time.
+	 * 
+	 * @throws WeatherException
+	 */
+	public static String determineTimezone(double latti, double longi) {
+
+		String url = timezoneUrl1 + latti + "," + longi + timezoneUrl2;
+		StringBuilder jsonText = new StringBuilder();
+
+		try {
+			URL tzone = new URL(url);
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					tzone.openStream()));
+
+			String temp = "";
+			while ((temp = in.readLine()) != null) {
+				jsonText.append(temp);
+			}
+			in.close();
+		} catch (Exception e) {
+			return ("error");
+		}
+		JSONObject tzJson;
+
+		tzJson = new JSONObject(jsonText.toString());
+		return tzJson.getString("timeZoneId");
+	}
+	
+	/**
+	 * Returns all the String at the given URL. This method is used to fetch the
+	 * raw JSON String from the supplied URL
+	 * 
+	 * @param url
+	 *            is the url from which JSON is to be fetched
+	 * @return returns all the text on the supplied url webpage
+	 */
+	public static String readFromURL(String url) {
+		StringBuilder jsonDerulo = new StringBuilder();
+
+		try {
+			URL oracle = new URL(url);
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					oracle.openStream()));
+			String temp = "";
+
+			while ((temp = in.readLine()) != null) {
+				jsonDerulo.append(temp);
+			}
+
+			in.close();
+
+		} catch (Exception e) {
+		}
+
+		return jsonDerulo.toString();
+	}
 
 	/**
 	 * 

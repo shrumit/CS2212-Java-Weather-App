@@ -1,28 +1,38 @@
 package ca.uwo.csd.cs2212.group5;
 
+import java.util.Calendar;
+import java.util.TimeZone;
+
 public class ShortTerm {
 
-	private Parameter temperature;
 	private String description;
-	private static final Parameter nullParam = new Parameter("Error", "Error", 0);
-	
-	public ShortTerm(){
-		temperature = nullParam;
-		description = "Error";
+	private int temperature;
+	private Calendar time;
+	private String iconCode;
+
+	public ShortTerm(String timezone) {
+		time = Calendar.getInstance(TimeZone.getTimeZone(timezone));    
+
 	}
 
 	public void setTemp(int value) {
-		value = MiscOperations.tempToCelsius(value);
-		temperature = new Parameter("Temperature", "Celsius", value);
-
+		this.temperature = value;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	public String toString() {
-		return (temperature.toString() + "\n" + "Conditions: \t\t" + description);
+	public void setTime(long unixTime) {
+		time.setTimeInMillis(unixTime*1000);
 	}
-	
+
+	public void setIcon(String iconCode){
+		this.iconCode = iconCode;
+	}
+
+	public String toString() {
+		return description;
+	}
+
 }

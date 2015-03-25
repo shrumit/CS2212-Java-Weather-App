@@ -29,22 +29,22 @@ public class Parameter {
 		this.value = value;
 	}
 
-	/**
-	 * This overload contructor is for wind direction, which does not have a
-	 * unit. Because wind direction data is itself a String, it is stored
-	 * instead of a data type and the value field is given -999 in order to
-	 * identify it as being null.
-	 * 
-	 * @param type
-	 *            is the type of data
-	 * @param unit
-	 *            is the unit of the data
-	 */
-	public Parameter(String type, String unit) {
-		this.type = type;
-		this.unit = unit;
-		this.value = -999;
-	}
+//	/**
+//	 * This overload contructor is for wind direction, which does not have a
+//	 * unit. Because wind direction data is itself a String, it is stored
+//	 * instead of a data type and the value field is given -999 in order to
+//	 * identify it as being null.
+//	 * 
+//	 * @param type
+//	 *            is the type of data
+//	 * @param unit
+//	 *            is the unit of the data
+//	 */
+//	public Parameter(String type, String unit) {
+//		this.type = type;
+//		this.unit = unit;
+//		this.value = -999;
+//	}
 
 	/**
 	 * Returns the type of parameter
@@ -63,14 +63,14 @@ public class Parameter {
 	 * Returns a formatted toString containing all three data fields
 	 */
 	public String toString() {
-		if (value == -999)
-			return (type + ": \t" + unit);
+		if (type.equalsIgnoreCase("Wind Direction"))
+			return ("<b>" + type + "</b>" + ": \t" + unit);
 
 		else if (type.equalsIgnoreCase("Temperature"))
-			return (type + ": \t" + value + " " + unit);
+			return ("<b>" + type + "</b>" + ": \t" + value + " " + unit);
 
 		else
-			return (type + ": \t\t" + value + " " + unit);
+			return ("<b>" + type + "</b>" + ": \t\t" + value + " " + unit);
 	}
 
 }

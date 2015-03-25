@@ -25,6 +25,8 @@ public class URLReader {
 
 	private String city;
 	private String country;
+	private double latti;
+	private double longi;
 
 	private static final String urlPrefix = "http://api.openweathermap.org/data/2.5";
 	private static final String currentPrefix = "/weather?q=";
@@ -131,6 +133,10 @@ public class URLReader {
 		JSONObject coord = mainObject.getJSONObject("coord");
 
 		// Coordinates (to set timezone)
+		
+		longi = Double.parseDouble(coord.get("lon").toString());
+		latti = Double.parseDouble(coord.get("lat").toString());
+
 		cw.setCoord(Double.parseDouble(coord.get("lon").toString()),
 				Double.parseDouble(coord.get("lat").toString()));
 
@@ -179,22 +185,22 @@ public class URLReader {
 
 		JSONObject mainObject = new JSONObject(shortTermJson);
 		JSONArray listArray = mainObject.getJSONArray("list");
-		
+
 		for (int i = 0; i < 8; i++) {
 			JSONObject thisTime = listArray.getJSONObject(i);
 			JSONObject main = thisTime.getJSONObject("main");
 			JSONArray weatherArray = thisTime.getJSONArray("weather");
 			JSONObject weather = weatherArray.getJSONObject(0);
-			
+
 			st[i] = new ShortTerm();
-			
+
 			// Temperature
 			int tempInt = (int) Double.parseDouble(main.get("temp").toString());
 			st[i].setTemp(tempInt);
-			
+
 			// Condition Description
 			st[i].setDescription(weather.get("description").toString());
-			
+
 		}
 
 	}
@@ -204,33 +210,34 @@ public class URLReader {
 		JSONArray listArray = mainObject.getJSONArray("list");
 
 		for (int i = 0; i < 5; i++) {
-			JSONObject thisTime = listArray.getJSONObject(i);
-			JSONObject main = thisTime.getJSONObject("main");
-			JSONArray weatherArray = thisTime.getJSONArray("weather");
+			JSONObject thisInstance = listArray.getJSONObject(i);
+			JSONObject main = thisInstance.getJSONObject("main");
+			JSONArray weatherArray = thisInstance.getJSONArray("weather");
 			JSONObject weather = weatherArray.getJSONObject(0);
-			
-			lt[i] = new LongTerm();
-			
+
+			// Coordinates and UTC time
+
+			lt[i] = new LongTerm(true, longi, latti);
+
 			// Temperature
 			int tempInt = (int) Double.parseDouble(main.get("temp").toString());
 			lt[i].setTemp(tempInt);
-			
+
 			// Condition Description
 			lt[i].setDescription(weather.get("description").toString());
-			
+
 			// Minimum Temperature
 			tempInt = (int) Double.parseDouble(main.get("temp_min").toString());
 			lt[i].setMinTemp(tempInt);
-			
+
 			// Maximum Temperature
 			tempInt = (int) Double.parseDouble(main.get("temp_max").toString());
 			lt[i].setMaxTemp(tempInt);
 		}
 	}
-	
-	public void parseMars()
-	{
-		
+
+	public void parseMars() {
+
 	}
 
 	// public void parseLT() throws NumberFormatException, JSONException,
