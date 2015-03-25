@@ -37,6 +37,8 @@ public class Tabs {
 	private static JTextPane textPane_1;
 
 	private static Location city;
+	private static boolean isCelsius = true;
+	
 	// private String displayString;
 
 	/**
@@ -203,9 +205,9 @@ public class Tabs {
 
 			sterms[i] = new JTextPane();
 			sterms[i].setContentType("text/html");
-			sterms[i].setBounds(width - 200, (i * 70) + 20, 150, 70);
+			sterms[i].setBounds(width - 200, (i * 100) + 20, 150, 100);
 
-			sterms[i].setText(city.st[i].toString());
+			sterms[i].setText(city.st[i].toString(isCelsius));
 
 			// sterms[i].setBackground((Color.GRAY));
 			frame.getContentPane().add(sterms[i]);
@@ -219,7 +221,7 @@ public class Tabs {
 			lterms[i].setContentType("text/html");
 			lterms[i].setBounds(50+(i*100), height-120, 150, 100);
 			
-			lterms[i].setText(city.lt[i].toString());
+			lterms[i].setText(city.lt[i].toString(isCelsius));
 			
 			lterms[i].setBackground((Color.GRAY));
 			frame.getContentPane().add(lterms[i]);

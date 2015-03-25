@@ -52,8 +52,19 @@ public class MiscOperations {
 	 *            is temperature in Kelvin
 	 * @return the temperature in Celsius
 	 */
-	public static int tempToCelsius(int kelvin) {
+	public static int getCelsius(int kelvin) {
 		return (int) (kelvin - 273.15);
+	}
+	
+	public static int getFarhenheit(int kelvin){
+		return (int) (getCelsius(kelvin) * 1.8);
+	}
+
+	public static int temperatureUnit(int kelvin, boolean unit) {
+		if (unit)
+			return (getCelsius(kelvin));
+		else
+			return (getFarhenheit(kelvin));
 	}
 
 	/**
@@ -103,7 +114,7 @@ public class MiscOperations {
 		tzJson = new JSONObject(jsonText.toString());
 		return tzJson.getString("timeZoneId");
 	}
-	
+
 	/**
 	 * Returns all the String at the given URL. This method is used to fetch the
 	 * raw JSON String from the supplied URL

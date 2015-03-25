@@ -40,7 +40,7 @@ public class LongTerm {
 		this.iconCode = iconCode;
 	}
 
-	public String toString() {
+	public String toString(boolean isCelsius) {
 		return description;
 	}
 

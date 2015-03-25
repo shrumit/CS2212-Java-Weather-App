@@ -10,8 +10,11 @@ public class ShortTerm {
 	private Calendar time;
 	private String iconCode;
 
+	private final String iconUrl = "http://openweathermap.org/img/w/";
+	private final String iconUrl2 = ".png";
+
 	public ShortTerm(String timezone) {
-		time = Calendar.getInstance(TimeZone.getTimeZone(timezone));    
+		time = Calendar.getInstance(TimeZone.getTimeZone(timezone));
 
 	}
 
@@ -24,15 +27,22 @@ public class ShortTerm {
 	}
 
 	public void setTime(long unixTime) {
-		time.setTimeInMillis(unixTime*1000);
+		time.setTimeInMillis(unixTime * 1000);
 	}
 
-	public void setIcon(String iconCode){
+	public void setIcon(String iconCode) {
 		this.iconCode = iconCode;
 	}
 
-	public String toString() {
-		return description;
-	}
+	public String toString(boolean unitCelsius) {
+		
+		StringBuilder ret = new StringBuilder();
 
+		ret.append("<img src=\"" + iconUrl + iconCode + iconUrl2 + "\">");
+		ret.append(" " + description);
+		ret.append("<br/>" + "<span style=\"color:#0000cd;\"><strong>"
+				+ MiscOperations.temperatureUnit(temperature, unitCelsius) + "</strong></span>");
+		
+		return ret.toString();
+	}
 }
