@@ -1,27 +1,11 @@
 package ca.uwo.csd.cs2212.group5;
 
-import java.awt.Container;
-import java.awt.EventQueue;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JTree;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-
-import java.awt.event.ActionListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JTextPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.Box;
-import java.awt.Font;
-import java.awt.Color;
+import javax.swing.*;
+
 
 public class Tabs {
 
@@ -38,7 +22,7 @@ public class Tabs {
 
 	private static Location city;
 	private static boolean isCelsius = true;
-	
+
 	// private String displayString;
 
 	/**
@@ -64,8 +48,8 @@ public class Tabs {
 		initialize();
 	}
 
-	private static final int width = 1000;
-	private static final int height = 700;
+	private static final int width = 700;
+	private static final int height = 1000;
 	private static JTextPane[] sterms = new JTextPane[8];
 	private static JTextPane[] lterms = new JTextPane[5];
 
@@ -76,53 +60,9 @@ public class Tabs {
 
 		frame = new JFrame();
 		// frame.getContentPane().setBackground(new Color(1, 61, 134));
-		frame.setBounds(100, 100, width, height);
+		frame.setBounds(100, 100, 936, 726);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-
-		// for (int i = 0; i < 8; i++){
-		//
-		//
-		// sterms[i] = new JTextPane();
-		// sterms[i].setContentType("text/html");
-		// sterms[i].setBounds(width-200, (i*70)+20, 150, 70);
-		//
-		// sterms[i].setText(city.st[i].toString());
-		//
-		// // sterms[i].setBackground((Color.GRAY));
-		// frame.getContentPane().add(sterms[i]);
-		// }
-
-		// //TABS
-		// JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		// tabbedPane.setBounds(12, 137, 433, 323);
-		// tabbedPane.setFont(new Font("Calibri Light", Font.PLAIN, 20));
-		// frame.getContentPane().add(tabbedPane);
-		//
-		// // Current Weather Tab
-		// cPane = new JTextPane();
-		// cPane.setBackground(new Color(210, 229, 243));
-		// cPane.setText("Current");
-		// cPane.setContentType("text/html");
-		// tabbedPane.addTab("Current", null, cPane, null);
-		//
-		// // Short Term Weather Tab
-		// sPane = new JTextPane();
-		// sPane.setText("Short");
-		// sPane.setContentType("text/html");
-		// tabbedPane.addTab("Short Term", null, sPane, null);
-		//
-		// // Long Term Weather Tab
-		// lPane = new JTextPane();
-		// lPane.setText("Long");
-		// lPane.setContentType("text/html");
-		// tabbedPane.addTab("Long Term", null, lPane, null);
-		//
-		// textPane_1 = new JTextPane();
-		// tabbedPane.addTab("New tab", null, textPane_1, null);
-		// textPane_1.setText("Current");
-		// textPane_1.setContentType("text/html");
-		// textPane_1.setBackground(new Color(210, 229, 243));
 
 		// This is the menu bar item "Program"
 		JMenuBar menuBar = new JMenuBar();
@@ -156,9 +96,16 @@ public class Tabs {
 		getButton.setBounds(351, 8, 70, 38);
 		frame.getContentPane().add(getButton);
 
-		JTextPane currentPane = new JTextPane();
-		currentPane.setBounds(12, 59, 575, 298);
-		frame.getContentPane().add(currentPane);
+		JPanel curPanel = new JPanel();
+		curPanel.setBounds(12, 85, 474, 337);
+		frame.getContentPane().add(curPanel);
+		GridBagLayout gbl_curPanel = new GridBagLayout();
+
+		gbl_curPanel.columnWidths = new int[] { 0, 0 };
+		gbl_curPanel.rowHeights = new int[] { 0, 0 };
+		gbl_curPanel.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
+		gbl_curPanel.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
+		curPanel.setLayout(gbl_curPanel);
 
 		// What happens once Get button is pressed
 		getButton.addActionListener(new ActionListener() {
@@ -197,35 +144,40 @@ public class Tabs {
 		// Displays Short Term Weather <unfinished>
 		displayShort();
 		displayLong();
+		// displayCurrent();
 
 	}
 
 	private static void displayShort() {
+
+		JPanel stermPanel = new JPanel();
+		stermPanel.setBounds(12, 626, 894, -181);
+		stermPanel.setLayout(new GridLayout(1, 8, 0, 0));
+
 		for (int i = 0; i < 8; i++) {
 
 			sterms[i] = new JTextPane();
 			sterms[i].setContentType("text/html");
-			sterms[i].setBounds(width - 200, (i * 100) + 20, 150, 100);
-
+			stermPanel.add(sterms[i]);
 			sterms[i].setText(city.st[i].toString(isCelsius));
 
 			// sterms[i].setBackground((Color.GRAY));
-			frame.getContentPane().add(sterms[i]);
+			System.out.println("finished");
 		}
+		frame.getContentPane().add(stermPanel);
 
 	}
-	
+
 	private static void displayLong() {
-		for (int i = 0; i < 5; i++){
+		for (int i = 0; i < 5; i++) {
 			lterms[i] = new JTextPane();
 			lterms[i].setContentType("text/html");
-			lterms[i].setBounds(50+(i*100), height-120, 150, 100);
-			
+			lterms[i].setBounds(50 + (i * 100), height - 120, 150, 100);
+
 			lterms[i].setText(city.lt[i].toString(isCelsius));
-			
+
 			lterms[i].setBackground((Color.GRAY));
 			frame.getContentPane().add(lterms[i]);
 		}
 	}
-
 }

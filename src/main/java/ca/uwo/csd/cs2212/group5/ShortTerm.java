@@ -15,7 +15,6 @@ public class ShortTerm {
 
 	public ShortTerm(String timezone) {
 		time = Calendar.getInstance(TimeZone.getTimeZone(timezone));
-
 	}
 
 	public void setTemp(int value) {
