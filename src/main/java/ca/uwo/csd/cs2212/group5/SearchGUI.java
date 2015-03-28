@@ -4,58 +4,61 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import net.miginfocom.swing.MigLayout;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.Iterator;
 
 public class SearchGUI {
 
-	private static JFrame mainFrame;
-	private static JFrame sf;
-	private static JButton srch;
-	private static JTextField srchf;
+	private static JFrame frame;
+	private static JButton searchButton;
+	private static JTextField searchField;
 	private static JList list;
 	private static JButton select;
+	private static JButton mars;
 	private static DefaultListModel model;
-	private static Search sr;
-	private static Iterator ir;
+	private static Search search;
+	private static Iterator iterator;
 	private static int currentIndex = -1;
 
 	public static void main(String[] args) {
 
-		sf = new JFrame("Select Location");
-		sf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		sf.setBounds(500, 300, 500, 200);
+		frame = new JFrame("Select Location");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(500, 300, 0, 0);
 
-		searchRender();
+		renderGUI();
 		readInput();
-		// sf.pack();
-		sf.setVisible(true);
+		frame.pack();
+		frame.setVisible(true);
 
 	}
 
 	public static void readInput() {
-		srch.addActionListener(new ActionListener() {
+		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				model.removeAllElements();
 				select.setEnabled(false);
-				
-				String entry = srchf.getText();
+
+				String entry = searchField.getText();
 
 				if (entry.length() < 3) {
-					model.addElement("Query is too short! Search again please.");
+					model.addElement("Query must be longer than two characters.");
 					readInput();
 				} else if (!isAlpha(entry)) {
-					model.addElement("Invalid character entered! Search again please.");
+					model.addElement("Invalid character entered.");
 					readInput();
 				}
 
 				else {
-					sr = new Search(entry);
-					ir = sr.getResults();
-					while (ir.hasNext()) {
-						model.addElement(ir.next());
+					search = new Search(entry);
+					iterator = search.getResults();
+					while (iterator.hasNext()) {
+						model.addElement(iterator.next());
 					}
 					if (!((String) model.getElementAt(0))
 							.equalsIgnoreCase("No results found.")) {
@@ -65,6 +68,13 @@ public class SearchGUI {
 				}
 			}
 
+		});
+
+		mars.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				frame.dispose();
+				WeatherGUI.startWeather(-1, " ");
+			}
 		});
 	}
 
@@ -77,9 +87,11 @@ public class SearchGUI {
 
 		select.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				if (currentIndex>=0){
-					int cityId = sr.getId(currentIndex);
-					System.out.println(cityId + " " + currentIndex);
+				if (currentIndex >= 0) {
+					int cityId = search.getId(currentIndex);
+					String name = search.getName(currentIndex);
+					frame.dispose();
+					WeatherGUI.startWeather(cityId, name);
 				}
 			}
 		});
@@ -90,31 +102,48 @@ public class SearchGUI {
 		return arg.matches("[a-zA-Z,. ]+");
 	}
 
-	private static void searchRender() {
-		sf.getContentPane().setLayout(new BorderLayout());
-		JPanel top = new JPanel();
-		top.setLayout(new GridLayout());
+	private static void renderGUI() {
 
-		sf.add(top, BorderLayout.NORTH);
+		setUIFont(new javax.swing.plaf.FontUIResource(new Font("Arial",
+				Font.PLAIN, 20)));
 
-		srchf = new JTextField("");
-		top.add(srchf);
+		JPanel panel = new JPanel();
+		panel.setLayout(new MigLayout());
+		panel.setBackground(new Color(225, 230, 246));
+		frame.add(panel);
 
-		srch = new JButton("Search");
-		srch.setPreferredSize(new Dimension(0, 35));
-		top.add(srch);
-		
+		JLabel city = new JLabel("City:");
 
-		String[] arr = { "randon" };
+		searchField = new JTextField();
+
+		searchButton = new JButton("Search");
+
 		model = new DefaultListModel();
 		list = new JList(model);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-		sf.add(list, BorderLayout.CENTER);
-
 		select = new JButton("Choose");
 		select.setEnabled(false);
-		sf.add(select, BorderLayout.EAST);
 
+		mars = new JButton("Mars");
+
+		// panel.add(city);
+		panel.add(searchField, "growx, pushx");
+		panel.add(searchButton, "wrap, skip");
+		panel.add(new JScrollPane(list), "growx, pushx, growy, pushy");
+		panel.add(select, "skip, wrap");
+		panel.add(mars);
+
+	}
+
+	private static void setUIFont(javax.swing.plaf.FontUIResource f) {
+		java.util.Enumeration keys = UIManager.getDefaults().keys();
+		while (keys.hasMoreElements()) {
+			Object key = keys.nextElement();
+			Object value = UIManager.get(key);
+			if (value instanceof javax.swing.plaf.FontUIResource) {
+				UIManager.put(key, f);
+			}
+		}
 	}
 }

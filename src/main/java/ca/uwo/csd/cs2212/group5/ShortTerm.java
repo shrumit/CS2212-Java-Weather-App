@@ -1,5 +1,6 @@
 package ca.uwo.csd.cs2212.group5;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -10,8 +11,6 @@ public class ShortTerm {
 	private Calendar time;
 	private String iconCode;
 
-	private final String iconUrl = "http://openweathermap.org/img/w/";
-	private final String iconUrl2 = ".png";
 
 	public ShortTerm(String timezone) {
 		time = Calendar.getInstance(TimeZone.getTimeZone(timezone));
@@ -32,16 +31,33 @@ public class ShortTerm {
 	public void setIcon(String iconCode) {
 		this.iconCode = iconCode;
 	}
+	
+	public String getTemp(boolean cels) {
+		int tempInt = MiscOperations.temperatureUnit(temperature, cels);
+		return Integer.toString(tempInt);
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public String getTime() {
+		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
+		sdf.setTimeZone(time.getTimeZone());
+		return sdf.format(time.getTime());
+	}
+
+	public String getIcon() {
+		return iconCode;
+	}
+
 
 	public String toString(boolean unitCelsius) {
 		
 		StringBuilder ret = new StringBuilder();
-
-		ret.append("<img src=\"" + iconUrl + iconCode + iconUrl2 + "\">");
 		ret.append(" " + description);
 		ret.append("<br/>" + "<span style=\"color:#0000cd;\"><strong>"
 				+ MiscOperations.temperatureUnit(temperature, unitCelsius) + "</strong></span>");
-		
 		return ret.toString();
 	}
 }

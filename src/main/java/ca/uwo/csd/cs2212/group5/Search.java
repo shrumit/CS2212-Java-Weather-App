@@ -15,19 +15,25 @@ public class Search {
 	public Search(String arg) {
 		String jsonString = MiscOperations.readFromURL(url1 + arg + url2);
 
-		JSONObject main = new JSONObject(jsonString);
-		JSONArray array = main.getJSONArray("list");
+		try {
+			JSONObject main = new JSONObject(jsonString);
+			JSONArray array = main.getJSONArray("list");
 
-		count = (int) main.get("count");
-		api = new City[count];
+			count = (int) main.get("count");
+			api = new City[count];
 
-		for (int i = 0; i < count; i++) {
-			JSONObject location = array.getJSONObject(i);
-			int id = (int) location.get("id");
-			String city = location.getString("name");
-			String country = location.getJSONObject("sys").getString("country");
+			for (int i = 0; i < count; i++) {
+				JSONObject location = array.getJSONObject(i);
+				int id = (int) location.get("id");
+				String city = location.getString("name");
+				String country = location.getJSONObject("sys").getString(
+						"country");
 
-			api[i] = new City(city, country, id);
+				api[i] = new City(city, country, id);
+			}
+
+		} catch (Exception e) {
+			count = 0;
 		}
 
 	}
@@ -46,7 +52,10 @@ public class Search {
 	}
 
 	public int getId(int index) {
-		return 2131;
+		return api[index].getId();
 	}
 
+	public String getName(int index) {
+		return api[index].toString();
+	}
 }

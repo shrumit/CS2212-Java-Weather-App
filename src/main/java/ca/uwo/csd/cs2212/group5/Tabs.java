@@ -158,7 +158,7 @@ public class Tabs {
 
 			sterms[i] = new JTextPane();
 			sterms[i].setContentType("text/html");
-			stermPanel.add(sterms[i]);
+			stermPanel.add(sterms[i]); 
 			sterms[i].setText(city.st[i].toString(isCelsius));
 
 			// sterms[i].setBackground((Color.GRAY));

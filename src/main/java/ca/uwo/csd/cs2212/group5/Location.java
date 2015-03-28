@@ -1,6 +1,8 @@
 package ca.uwo.csd.cs2212.group5;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -21,9 +23,9 @@ public class Location {
 	public ShortTerm[] st = new ShortTerm[8];
 
 	private static final String urlPrefix = "http://api.openweathermap.org/data/2.5";
-	private static final String currentPrefix = "/weather?q=";
-	private static final String stermPrefix = "/forecast?q=";
-	private static final String ltermPrefix = "/forecast/daily?q=";
+	private static final String currentPrefix = "/weather?id=";
+	private static final String stermPrefix = "/forecast?id=";
+	private static final String ltermPrefix = "/forecast/daily?id=";
 	private static final String urlSuffix = "&mode=json";
 
 	public Location(int cityId) {
@@ -52,6 +54,7 @@ public class Location {
 				+ urlSuffix);
 		shortJson = MiscOperations.readFromURL(urlPrefix + stermPrefix + cityId
 				+ urlSuffix);
+
 	}
 
 	private void setCoordinates() {
@@ -65,11 +68,11 @@ public class Location {
 
 	private void makeLongTerm() {
 		JSONObject entire = new JSONObject(longJson);
+		System.out.println(entire.toString());
 		JSONArray listArray = entire.getJSONArray("list");
 
 		for (int i = 0; i < 5; i++) {
 			JSONObject thisInstance = listArray.getJSONObject(i);
-			// JSONObject main = thisInstance.getJSONObject("main");
 			JSONObject weather = thisInstance.getJSONArray("weather")
 					.getJSONObject(0);
 			JSONObject temp = thisInstance.getJSONObject("temp");
@@ -102,6 +105,7 @@ public class Location {
 	private void makeShortTerm() {
 
 		JSONObject entire = new JSONObject(shortJson);
+		System.out.println(entire.toString());
 		JSONArray listArray = entire.getJSONArray("list");
 
 		for (int i = 0; i < 8; i++) {
@@ -135,6 +139,7 @@ public class Location {
 		cw = new CurrentWeather(timezone);
 
 		JSONObject entire = new JSONObject(currentJson);
+		System.out.println(entire.toString());
 		JSONObject sys = entire.getJSONObject("sys");
 		JSONObject weather = entire.getJSONArray("weather").getJSONObject(0);
 		JSONObject main = entire.getJSONObject("main");
@@ -171,6 +176,8 @@ public class Location {
 		// Condition Description
 		cw.setDescription(weather.get("description").toString());
 
+		cw.setIconCode(weather.get("icon").toString());
+
 		// Sunset Time
 		cw.setSunset(Long.parseLong(sys.get("sunset").toString()));
 
@@ -180,4 +187,9 @@ public class Location {
 		//
 	}
 
+	public String getRefreshTime() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd MMM hh:mm a");
+		sdf.setTimeZone(refreshTime.getTimeZone());
+		return sdf.format(refreshTime.getTime());
+	}
 }

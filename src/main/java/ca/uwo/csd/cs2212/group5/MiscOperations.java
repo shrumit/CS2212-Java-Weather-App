@@ -57,7 +57,7 @@ public class MiscOperations {
 	}
 	
 	public static int getFarhenheit(int kelvin){
-		return (int) (getCelsius(kelvin) * 1.8);
+		return (int) ((getCelsius(kelvin) * 9)/5) + 32;
 	}
 
 	public static int temperatureUnit(int kelvin, boolean unit) {
@@ -67,19 +67,7 @@ public class MiscOperations {
 			return (getFarhenheit(kelvin));
 	}
 
-	/**
-	 * Takes Calendar object and returns a String of format HH : MM
-	 * 
-	 * @param time
-	 *            is Calendar object representing time
-	 * @return String representation of time
-	 */
-	public static String displayTime(Calendar time) {
-		String hour = String.format("%02d", time.get(Calendar.HOUR));
-		String minute = String.format("%02d", time.get(Calendar.MINUTE));
 
-		return (hour + " : " + minute);
-	}
 
 	private static final String timezoneUrl1 = "https://maps.googleapis.com/maps/api/timezone/json?location=";
 	private static final String timezoneUrl2 = "&timestamp=0";

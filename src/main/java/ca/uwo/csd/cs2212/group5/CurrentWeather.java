@@ -1,5 +1,6 @@
 package ca.uwo.csd.cs2212.group5;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -26,7 +27,7 @@ public class CurrentWeather {
 	private int maxTemp;
 	private String description;
 	private String iconCode;
-	
+
 	private Calendar sunrise;
 	private Calendar sunset;
 
@@ -35,8 +36,8 @@ public class CurrentWeather {
 	 */
 	public CurrentWeather(String timezone) {
 		this.timezone = timezone;
-		sunrise = Calendar.getInstance(TimeZone.getTimeZone(timezone));    
-		sunset = Calendar.getInstance(TimeZone.getTimeZone(timezone));    
+		sunrise = Calendar.getInstance(TimeZone.getTimeZone(timezone));
+		sunset = Calendar.getInstance(TimeZone.getTimeZone(timezone));
 	}
 
 	/**
@@ -112,13 +113,13 @@ public class CurrentWeather {
 		direction = dir;
 	}
 
-	/**
-	 * Outputs data from all the variables as a single string.
-	 */
-
 	public void setDescription(String description) {
 		this.description = description;
 
+	}
+
+	public void setIconCode(String code) {
+		this.iconCode = code;
 	}
 
 	public void setSunset(long sunset) {
@@ -129,15 +130,57 @@ public class CurrentWeather {
 		this.sunrise.setTimeInMillis(sunrise * 1000);
 	}
 
+	// ///////////////////////////////////////////
 
-//	public String toString() {
-//		return (temperature.toString() + "<br/>" + humidity.toString()
-//				+ "<br/>" + windSpeed.toString() + "<br/>"
-//				+ windDirection.toString() + "<br/>" + airPressure.toString()
-//				+ "<br/>" + minTemp.toString() + "<br/>" + maxTemp.toString()
-//				+ "<br/>" + "<b>Conditions</b>: \t\t" + description + "<br/>"
-//				+ "<b>Sunrise</b>: \t\t" + MiscOperations.displayTime(sunrise)
-//				+ "<br/>" + "<b>Sunset</b>: \t\t" + MiscOperations
-//					.displayTime(sunset));
-//	}
+	public String getTemperature(boolean cels) {
+		int tempInt = MiscOperations.temperatureUnit(temperature, cels);
+		return Integer.toString(tempInt);
+	}
+
+	public String getHumidity() {
+		return Integer.toString(humidity);
+	}
+
+	public String getWind() {
+		return Integer.toString(speed) + "km/h";
+	}
+
+	public String getPressure() {
+		return Integer.toString(pressure);
+	}
+
+	public String getMinTemp(boolean cels) {
+		int tempInt = MiscOperations.temperatureUnit(minTemp, cels);
+		return Integer.toString(tempInt);
+	}
+
+	public String getMaxTemp(boolean cels) {
+		int tempInt = MiscOperations.temperatureUnit(maxTemp, cels);
+		return Integer.toString(tempInt);
+	}
+
+	public String getWindDir() {
+		return direction;
+	}
+
+	public String getSunset() {
+		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
+		sdf.setTimeZone(sunset.getTimeZone());
+		return sdf.format(sunset.getTime());
+	}
+
+	public String getSunrise() {
+		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
+		sdf.setTimeZone(sunrise.getTimeZone());
+		return sdf.format(sunrise.getTime());
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public String getIconCode() {
+		return iconCode;
+	}
+
 }
