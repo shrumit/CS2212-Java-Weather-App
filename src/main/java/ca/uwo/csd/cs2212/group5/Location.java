@@ -68,7 +68,6 @@ public class Location {
 
 	private void makeLongTerm() {
 		JSONObject entire = new JSONObject(longJson);
-		System.out.println(entire.toString());
 		JSONArray listArray = entire.getJSONArray("list");
 
 		for (int i = 0; i < 5; i++) {
@@ -105,7 +104,6 @@ public class Location {
 	private void makeShortTerm() {
 
 		JSONObject entire = new JSONObject(shortJson);
-		System.out.println(entire.toString());
 		JSONArray listArray = entire.getJSONArray("list");
 
 		for (int i = 0; i < 8; i++) {
@@ -139,7 +137,6 @@ public class Location {
 		cw = new CurrentWeather(timezone);
 
 		JSONObject entire = new JSONObject(currentJson);
-		System.out.println(entire.toString());
 		JSONObject sys = entire.getJSONObject("sys");
 		JSONObject weather = entire.getJSONArray("weather").getJSONObject(0);
 		JSONObject main = entire.getJSONObject("main");

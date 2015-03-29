@@ -3,6 +3,7 @@ package ca.uwo.csd.cs2212.group5;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -49,7 +50,6 @@ public class WeatherGUI {
 	 */
 	public static void startWeather(int cityId, String name) {
 
-		System.out.println(cityId);
 		if (cityId == -1) {
 			try {
 
@@ -101,20 +101,21 @@ public class WeatherGUI {
 		panel.setLayout(new MigLayout());
 
 		System.out.println(mars.getRefreshTime());
-		TitledBorder refreshTime = new TitledBorder("Refresh Time: "+ mars.getRefreshTime());
+		TitledBorder refreshTime = new TitledBorder("Refresh Time: "
+				+ mars.getRefreshTime());
 		refreshTime.setTitleJustification(TitledBorder.RIGHT);
 		panel.setBorder(refreshTime);
 
-		JLabel pressure = new JLabel("PRESSURE: " + mars.mr.getPressure()
+		JLabel pressure = new JLabel("Pressure: " + mars.mr.getPressure()
 				+ " hPa");
 
-		JLabel humidity = new JLabel("HUMIDITY: " + mars.mr.getHumidity()
+		JLabel humidity = new JLabel("Humidity: " + mars.mr.getHumidity()
 				+ " %");
-		JLabel wind = new JLabel("WIND: " + mars.mr.getWindSpeed()
+		JLabel wind = new JLabel("Wind: " + mars.mr.getWindSpeed()
 				+ mars.mr.getWindDir());
-		JLabel max = new JLabel("HIGH: " + mars.mr.getMaxTemp(isCelsius));
-		JLabel min = new JLabel("LOW: " + mars.mr.getMinTemp(isCelsius));
-		JLabel condition = new JLabel(mars.mr.getCondition());
+		JLabel max = new JLabel("High: " + mars.mr.getMaxTemp(isCelsius));
+		JLabel min = new JLabel("Low: " + mars.mr.getMinTemp(isCelsius));
+		JLabel condition = new JLabel("Description: " + mars.mr.getCondition());
 
 		panel.add(condition, "wrap");
 		panel.add(min, "wrap");
@@ -122,7 +123,7 @@ public class WeatherGUI {
 		panel.add(pressure, "wrap");
 		panel.add(humidity, "wrap");
 		panel.add(wind, "wrap");
-		
+
 		frame.add(panel);
 
 	}
@@ -161,14 +162,13 @@ public class WeatherGUI {
 
 		JMenuItem mntmMars = new JMenuItem("Mars Mode");
 		mnLocation.add(mntmMars);
-		
+
 		mntmMars.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
 				startWeather(-1, null);
 			}
 		});
-
 
 		JMenu mnData = new JMenu("Data");
 		menuBar.add(mnData);
@@ -240,9 +240,9 @@ public class WeatherGUI {
 		cPanel = new JPanel();
 		cPanel.setLayout(new MigLayout());
 		populateCurrent();
-		panel.add(cPanel, "wrap");
+		panel.add(cPanel, "wrap, alignx center");
 
-		JLabel ltermForecast = new JLabel("LONG TERM FORECAST");
+		JLabel ltermForecast = new JLabel(" ");
 		panel.add(ltermForecast, "wrap");
 
 		lPanel = new JPanel();
@@ -250,7 +250,7 @@ public class WeatherGUI {
 		populateLT();
 		panel.add(lPanel, "growx, pushx, growy, pushy, wrap");
 
-		JLabel stermForecast = new JLabel("SHORT TERM FORECAST");
+		JLabel stermForecast = new JLabel(" ");
 		panel.add(stermForecast, "wrap");
 
 		sPanel = new JPanel();
@@ -266,30 +266,40 @@ public class WeatherGUI {
 
 		temp.setFont(new Font("Arial", 0, 100));
 
-		TitledBorder refreshTime = new TitledBorder("Refresh Time: "+loc.getRefreshTime());
-		refreshTime.setTitleJustification(TitledBorder.RIGHT);
-		refreshTime.setBorder(new LineBorder(Color.orange));
-		
+		TitledBorder refreshTime = new TitledBorder("Refresh Time: "
+				+ loc.getRefreshTime());
+		// refreshTime.setTitleJustification(TitledBorder.RIGHT);
+		// refreshTime.setBorder(new LineBorder(Color.orange));
+
 		cPanel.setBorder(refreshTime);
 
-		JLabel sunrise = new JLabel("SUNRISE: " + loc.cw.getSunrise());
-		JLabel sunset = new JLabel("SUNSET: " + loc.cw.getSunset());
-		JLabel pressure = new JLabel("PRESSURE: " + loc.cw.getPressure()
+		JLabel sunrise = new JLabel("Sunrise: " + loc.cw.getSunrise());
+		JLabel sunset = new JLabel("Sunset: " + loc.cw.getSunset());
+		JLabel pressure = new JLabel("Pressure: " + loc.cw.getPressure()
 				+ " hPa");
 
-		JLabel humidity = new JLabel("HUMIDITY: " + loc.cw.getHumidity() + " %");
-		JLabel speed = new JLabel("WIND: " + loc.cw.getWind()
+		JLabel humidity = new JLabel("Humidity: " + loc.cw.getHumidity() + " %");
+		JLabel speed = new JLabel("Wind: " + loc.cw.getWind() + "  "
 				+ loc.cw.getWindDir());
-		JLabel max = new JLabel("HIGH: " + loc.cw.getMaxTemp(isCelsius));
-		JLabel min = new JLabel("LOW: " + loc.cw.getMinTemp(isCelsius));
+		JLabel max = new JLabel("High: " + loc.cw.getMaxTemp(isCelsius)
+				+ getUnitChar());
+		JLabel min = new JLabel("Low: " + loc.cw.getMinTemp(isCelsius)
+				+ getUnitChar());
 
-		cPanel.add(temp);
+		ImageIcon icon = new ImageIcon(getIconImage(loc.cw.getIconCode()));
+		Image img = icon.getImage();
+		Image newimg = img.getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+		JLabel image = new JLabel(new ImageIcon(newimg));
+
+		cPanel.add(image, "spany");
+		cPanel.add(temp, "spany");
 		cPanel.add(min, "wrap");
 		cPanel.add(max, "wrap");
 		cPanel.add(sunrise, "wrap");
 		cPanel.add(sunset, "wrap");
-		cPanel.add(pressure, "wrap");
 		cPanel.add(humidity, "wrap");
+		cPanel.add(pressure, "wrap");
+		cPanel.add(speed);
 
 	}
 
@@ -319,7 +329,7 @@ public class WeatherGUI {
 			ilPanel[i].add(temp);
 			ilPanel[i].add(image, "wrap");
 			ilPanel[i].add(des, "wrap");
-			ilPanel[i].add(low, "wrap");
+			ilPanel[i].add(low);
 			ilPanel[i].add(high, "wrap");
 
 			ilPanel[i].setBorder(timeB);
@@ -338,6 +348,7 @@ public class WeatherGUI {
 
 			TitledBorder timeB = new TitledBorder(loc.st[i].getTime());
 			timeB.setTitleJustification(TitledBorder.RIGHT);
+			// timeB.setTitleColor(Color.BLUE);
 
 			JLabel des = new JLabel(loc.st[i].getDescription());
 			JLabel temp = new JLabel(loc.st[i].getTemp(isCelsius)
@@ -375,9 +386,9 @@ public class WeatherGUI {
 
 	private static String getUnitChar() {
 		if (isCelsius)
-			return ("\u00B0 C");
+			return ("\u00B0C");
 		else
-			return ("\u00B0 F");
+			return ("\u00B0F");
 	}
 
 	private static void setUIFont(javax.swing.plaf.FontUIResource f) {

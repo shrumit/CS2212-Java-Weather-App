@@ -39,7 +39,11 @@ public class MarsCurrent {
 	}
 
 	public void setCondition(String condition) {
-		this.description = condition;
+		System.out.println(condition);
+		if ((condition.length() == 0) || (condition == null)) {
+			this.description = "Condition unavailable.";
+		} else
+			this.description = condition;
 	}
 
 	// /////////////////

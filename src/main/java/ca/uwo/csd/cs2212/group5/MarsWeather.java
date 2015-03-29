@@ -59,6 +59,7 @@ public class MarsWeather {
 
 		// Condition Description
 		tempString = main.getString("atmo_opacity");
+		System.out.println("String" + tempString);
 		mr.setCondition(tempString);
 
 		// Humidity
