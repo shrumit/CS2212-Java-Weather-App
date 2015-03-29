@@ -1,8 +1,5 @@
 package ca.uwo.csd.cs2212.group5;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -21,6 +18,7 @@ public class MarsWeather {
 		refreshTime = Calendar.getInstance();
 		jsonString = MiscOperations.readFromURL(url);
 		mr = new MarsCurrent();
+		parseJson();
 	}
 
 	private void parseJson() {
@@ -28,18 +26,20 @@ public class MarsWeather {
 		main = main.getJSONObject("report");
 		int tempInt;
 		String tempString;
+		System.out.println(main);
 
 		// Minimum Temperature
-		tempInt = (int) Double.parseDouble(main.getString("min_temp"));
+		tempInt = (int) Double.parseDouble(main.get("min_temp").toString());
+		System.out.println(tempInt);
 		mr.setMinTemp(tempInt);
 
 		// Maximum Temperature
-		tempInt = (int) Double.parseDouble(main.getString("max_temp"));
+		tempInt = (int) Double.parseDouble(main.get("max_temp").toString());
 		mr.setMaxTemp(tempInt);
 
 		// Wind Speed
 		try {
-			tempInt = (int) Double.parseDouble(main.getString("wind_speed"));
+			tempInt = (int) Double.parseDouble(main.get("wind_speed").toString());
 			mr.setWindSpeed(tempInt);
 		} catch (Exception e) {
 			mr.setWindSpeed(0);
@@ -52,10 +52,10 @@ public class MarsWeather {
 				mr.setWindDir(main.getString("wind_direction"));
 
 			} catch (Exception e) {
-				mr.setWindDir("--");
+				mr.setWindDir("no wind");
 			}
 		} else
-			mr.setWindDir("--");
+			mr.setWindDir("no wind");
 
 		// Condition Description
 		tempString = main.getString("atmo_opacity");

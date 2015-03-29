@@ -1,19 +1,14 @@
 package ca.uwo.csd.cs2212.group5;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,10 +17,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextPane;
 import javax.swing.UIManager;
-import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import net.miginfocom.swing.MigLayout;
@@ -37,13 +29,12 @@ public class WeatherGUI {
 	private static boolean isCelsius = true;
 	private static String this_name;
 	private static int this_cityId;
-	// private static final String iconUrl =
-	// "<img src=\"http://openweathermap.org/img/w/";
-	// private static final String iconUrl2 =
-	// ".png\" style=\"width:50px;height:50px\">";
 	private static final String iconUrl = "http://openweathermap.org/img/w/";
 	private static final String iconUrl2 = ".png";
 	private static MarsWeather mars;
+	private static final Color backgroundCol = new Color(237, 243, 248);
+	private static final Color borderColor = new Color(156, 175, 194);
+	private static final Font textFont = new Font("Arial", Font.PLAIN, 20);
 
 	/**
 	 * @wbp.parser.entryPoint
@@ -65,7 +56,7 @@ public class WeatherGUI {
 				renderMenuBar();
 				renderMars();
 
-				frame.pack();
+				frame.setBounds(50, 50, 400, 400);
 				frame.setVisible(true);
 
 			} catch (Exception e) {
@@ -86,6 +77,7 @@ public class WeatherGUI {
 				renderMenuBar();
 				renderGUI();
 				// frame.setBounds(0, 0, 1000, 500);
+				// frame.setBackground(new Color(228,237,244));
 				frame.pack();
 				frame.setVisible(true);
 
@@ -119,7 +111,7 @@ public class WeatherGUI {
 				+ mars.mr.getWindDir());
 		JLabel max = new JLabel("High: " + mars.mr.getMaxTemp(isCelsius));
 		JLabel min = new JLabel("Low: " + mars.mr.getMinTemp(isCelsius));
-		JLabel condition = new JLabel("Description: " + mars.mr.getCondition());
+		JLabel condition = new JLabel(mars.mr.getCondition());
 
 		panel.add(condition, "wrap");
 		panel.add(min, "wrap");
@@ -146,7 +138,7 @@ public class WeatherGUI {
 
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
-
+		menuBar.setBackground(new Color(138, 155, 171));
 		JMenu mnProgram = new JMenu("Program");
 		menuBar.add(mnProgram);
 		JMenuItem mntmExit = new JMenuItem("Exit");
@@ -247,8 +239,8 @@ public class WeatherGUI {
 
 	private static void renderGUI() {
 
-		setUIFont(new javax.swing.plaf.FontUIResource(new Font("Arial",
-				Font.PLAIN, 20)));
+		setUIFont(new javax.swing.plaf.FontUIResource(textFont));
+
 		JPanel panel = new JPanel();
 		panel.setLayout(new MigLayout());
 		frame.add(panel);
@@ -264,7 +256,7 @@ public class WeatherGUI {
 		lPanel = new JPanel();
 		lPanel.setLayout(new GridLayout());
 		populateLT();
-		panel.add(lPanel, "growx, pushx, growy, pushy, wrap");
+		panel.add(lPanel, "alignx center, wrap");
 
 		JLabel stermForecast = new JLabel(" ");
 		panel.add(stermForecast, "wrap");
@@ -273,6 +265,7 @@ public class WeatherGUI {
 		sPanel.setLayout(new GridLayout());
 		populateST();
 		panel.add(sPanel, "growx, pushx, growy, pushy, wrap");
+		panel.setBackground(backgroundCol);
 
 	}
 
@@ -287,8 +280,10 @@ public class WeatherGUI {
 
 		TitledBorder refreshTime = new TitledBorder("Refresh Time: "
 				+ loc.getRefreshTime());
-		// refreshTime.setTitleJustification(TitledBorder.RIGHT);
-		// refreshTime.setBorder(new LineBorder(Color.orange));
+
+		refreshTime.setTitleColor(borderColor);
+		refreshTime.setTitleJustification(TitledBorder.RIGHT);
+//		refreshTime.setBorder(new LineBorder(Color.orange));
 
 		cPanel.setBorder(refreshTime);
 
@@ -319,6 +314,7 @@ public class WeatherGUI {
 		cPanel.add(humidity, "wrap");
 		cPanel.add(pressure, "wrap");
 		cPanel.add(speed);
+		cPanel.setBackground(backgroundCol);
 
 	}
 
@@ -334,6 +330,7 @@ public class WeatherGUI {
 
 			TitledBorder timeB = new TitledBorder(loc.lt[i].getTime());
 			timeB.setTitleJustification(TitledBorder.RIGHT);
+			timeB.setTitleColor(borderColor);
 
 			// JLabel time = new JLabel (loc.lt[i].getTime());
 			JLabel des = new JLabel(loc.lt[i].getDescription());
@@ -350,10 +347,11 @@ public class WeatherGUI {
 
 			ilPanel[i].add(temp);
 			ilPanel[i].add(image, "wrap");
-			ilPanel[i].add(des, "wrap");
+			ilPanel[i].add(des, "wrap, span 2");
 			ilPanel[i].add(low);
 			ilPanel[i].add(high, "wrap");
 
+			ilPanel[i].setBackground(backgroundCol);
 			ilPanel[i].setBorder(timeB);
 			lPanel.add(ilPanel[i]);
 
@@ -373,6 +371,8 @@ public class WeatherGUI {
 
 			TitledBorder timeB = new TitledBorder(loc.st[i].getTime());
 			timeB.setTitleJustification(TitledBorder.RIGHT);
+			timeB.setTitleColor(borderColor);
+
 			// timeB.setTitleColor(Color.BLUE);
 
 			JLabel des = new JLabel(loc.st[i].getDescription());
@@ -385,9 +385,10 @@ public class WeatherGUI {
 			isPanel[i].add(temp);
 			isPanel[i].add(image, "wrap");
 			temp.setFont(new Font(sPanel.getFont().getFontName(), 1, 25));
-			isPanel[i].add(des, "wrap");
+			isPanel[i].add(des, "wrap, span 2");
 			isPanel[i].setBorder(timeB);
 
+			isPanel[i].setBackground(backgroundCol);
 			sPanel.add(isPanel[i]);
 
 		}

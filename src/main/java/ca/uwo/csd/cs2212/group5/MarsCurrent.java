@@ -93,7 +93,10 @@ public class MarsCurrent {
 	 * @return
 	 */
 	public String getWindSpeed() {
-		return Integer.toString(speed);
+		if (speed != 0)
+			return Integer.toString(speed);
+		else
+			return "";
 	}
 
 	/**
@@ -119,8 +122,12 @@ public class MarsCurrent {
 	 * @return
 	 */
 	public String getMinTemp(boolean cels) {
-		int tempInt = MiscOperations.temperatureUnit(minTemp, cels);
-		return Integer.toString(tempInt);
+
+		if (cels)
+			return Integer.toString(minTemp);
+		else
+			return Integer.toString(MiscOperations.temperatureUnit(minTemp,
+					cels));
 
 	}
 
@@ -130,8 +137,11 @@ public class MarsCurrent {
 	 * @return
 	 */
 	public String getMaxTemp(boolean cels) {
-		int tempInt = MiscOperations.temperatureUnit(maxTemp, cels);
-		return Integer.toString(tempInt);
+		if (cels)
+			return Integer.toString(maxTemp);
+		else
+			return Integer.toString(MiscOperations.temperatureUnit(maxTemp,
+					cels));
 
 	}
 

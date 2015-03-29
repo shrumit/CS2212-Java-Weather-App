@@ -4,8 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-import org.json.JSONObject;
-
 /**
  * This class constructs an object storing various weather data. The data is
  * stored in objects of the Parameter class. Time is stored in objects of the

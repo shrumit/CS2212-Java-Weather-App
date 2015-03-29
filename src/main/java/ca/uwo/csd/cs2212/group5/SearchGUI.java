@@ -9,7 +9,6 @@ import net.miginfocom.swing.MigLayout;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.util.Iterator;
 
 public class SearchGUI {
@@ -24,6 +23,8 @@ public class SearchGUI {
 	private static Search search;
 	private static Iterator iterator;
 	private static int currentIndex = -1;
+	private static final Color backgroundCol = new Color(237, 243, 248);
+
 
 	/**
 	 * driver for the search window
@@ -127,7 +128,7 @@ public class SearchGUI {
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new MigLayout());
-		panel.setBackground(new Color(225, 230, 246));
+		panel.setBackground(backgroundCol);
 		frame.add(panel);
 
 		JLabel city = new JLabel("City:");

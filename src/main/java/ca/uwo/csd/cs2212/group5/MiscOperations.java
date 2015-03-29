@@ -3,8 +3,6 @@ package ca.uwo.csd.cs2212.group5;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.Calendar;
-
 import org.json.JSONObject;
 
 /**
@@ -17,22 +15,22 @@ import org.json.JSONObject;
 public class MiscOperations {
 
 	// for the conversion of wind directions
-	private static double N = 0;
-	private static double NNE = 22.5;
-	private static double NE = 45;
-	private static double ENE = 67.5;
-	private static double E = 90;
-	private static double ESE = 112.5;
-	private static double SE = 135;
-	private static double SSE = 157.5;
-	private static double S = 180;
-	private static double SSW = 202.5;
-	private static double SW = 225;
-	private static double WSW = 247.5;
-	private static double W = 270;
-	private static double WNW = 292.5;
-	private static double NW = 315;
-	private static double NNW = 338;
+	private static final double N = 0;
+	private static final double NNE = 22.5;
+	private static final double NE = 45;
+	private static final double ENE = 67.5;
+	private static final double E = 90;
+	private static final double ESE = 112.5;
+	private static final double SE = 135;
+	private static final double SSE = 157.5;
+	private static final double S = 180;
+	private static final double SSW = 202.5;
+	private static final double SW = 225;
+	private static final double WSW = 247.5;
+	private static final double W = 270;
+	private static final double WNW = 292.5;
+	private static final double NW = 315;
+	private static final double NNW = 338;
 
 	/**
 	 * Converts wind speed from m/s to km/h
@@ -55,9 +53,9 @@ public class MiscOperations {
 	public static int getCelsius(int kelvin) {
 		return (int) (kelvin - 273.15);
 	}
-	
-	public static int getFarhenheit(int kelvin){
-		return (int) ((getCelsius(kelvin) * 9)/5) + 32;
+
+	public static int getFarhenheit(int kelvin) {
+		return (int) ((getCelsius(kelvin) * 9) / 5) + 32;
 	}
 
 	public static int temperatureUnit(int kelvin, boolean unit) {
@@ -66,8 +64,6 @@ public class MiscOperations {
 		else
 			return (getFarhenheit(kelvin));
 	}
-
-
 
 	private static final String timezoneUrl1 = "https://maps.googleapis.com/maps/api/timezone/json?location=";
 	private static final String timezoneUrl2 = "&timestamp=0";
@@ -81,11 +77,17 @@ public class MiscOperations {
 	 */
 	public static String determineTimezone(double latti, double longi) {
 
-		String url = timezoneUrl1 + latti + "," + longi + timezoneUrl2;
+		StringBuilder url = new StringBuilder();
+		url.append(timezoneUrl1);
+		url.append(latti);
+		url.append(",");
+		url.append(longi);
+		url.append(timezoneUrl2);
+
 		StringBuilder jsonText = new StringBuilder();
 
 		try {
-			URL tzone = new URL(url);
+			URL tzone = new URL(url.toString());
 			BufferedReader in = new BufferedReader(new InputStreamReader(
 					tzone.openStream()));
 
