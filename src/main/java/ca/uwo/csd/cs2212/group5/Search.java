@@ -12,6 +12,10 @@ public class Search {
 	private final String url2 = "&type=like&mode=json";
 	private int count;
 
+	/**
+	 * Constructor to determine city names
+	 * @param arg
+	 */
 	public Search(String arg) {
 		String jsonString = MiscOperations.readFromURL(url1 + arg + url2);
 
@@ -38,6 +42,10 @@ public class Search {
 
 	}
 
+	/**
+	 * iterator to get results and put in arraylist
+	 * @return
+	 */
 	public Iterator getResults() {
 		ArrayList al = new ArrayList();
 

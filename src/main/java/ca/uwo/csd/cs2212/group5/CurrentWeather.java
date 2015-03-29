@@ -112,73 +112,136 @@ public class CurrentWeather {
 		String dir = MiscOperations.convertWindDir(value);
 		direction = dir;
 	}
-
+	
+	/**
+	 * sets condition using parameter
+	 * @param description
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 
 	}
 
+	/**
+	 * sets iconCode using parameter
+	 * @param code
+	 */
 	public void setIconCode(String code) {
 		this.iconCode = code;
 	}
 
+	/**
+	 * sets sunset time
+	 * @param sunset
+	 */
 	public void setSunset(long sunset) {
 		this.sunset.setTimeInMillis(sunset * 1000);
 	}
 
+	/**
+	 * sets sunrise time
+	 * @param sunrise
+	 */
 	public void setSunrise(long sunrise) {
 		this.sunrise.setTimeInMillis(sunrise * 1000);
 	}
 
 	// ///////////////////////////////////////////
 
+	/**
+	 * get temperature with conversion
+	 * @param cels
+	 * @return
+	 */
 	public String getTemperature(boolean cels) {
 		int tempInt = MiscOperations.temperatureUnit(temperature, cels);
 		return Integer.toString(tempInt);
 	}
 
+	/**
+	 * get humidity
+	 * @return
+	 */
 	public String getHumidity() {
 		return Integer.toString(humidity);
 	}
 
+	/**
+	 * get wind speed
+	 * @return
+	 */
 	public String getWind() {
 		return Integer.toString(speed) + "km/h";
 	}
 
+	/**
+	 * get pressure
+	 * @return
+	 */
 	public String getPressure() {
 		return Integer.toString(pressure);
 	}
 
+	/**
+	 * get min temp with conversion if needed
+	 * @param cels
+	 * @return
+	 */
 	public String getMinTemp(boolean cels) {
 		int tempInt = MiscOperations.temperatureUnit(minTemp, cels);
 		return Integer.toString(tempInt);
 	}
 
+	/**
+	 * get max temp with conversion if needed
+	 * @param cels
+	 * @return
+	 */
 	public String getMaxTemp(boolean cels) {
 		int tempInt = MiscOperations.temperatureUnit(maxTemp, cels);
 		return Integer.toString(tempInt);
 	}
 
+	/**
+	 * get wind direction
+	 * @return
+	 */
 	public String getWindDir() {
 		return direction;
 	}
 
+	/**
+	 * get sunset time
+	 * @return
+	 */
 	public String getSunset() {
 		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
 		sdf.setTimeZone(sunset.getTimeZone());
 		return sdf.format(sunset.getTime());
 	}
 
+	/**
+	 * get sunrise time
+	 * @return
+	 */
 	public String getSunrise() {
 		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
 		sdf.setTimeZone(sunrise.getTimeZone());
 		return sdf.format(sunrise.getTime());
 	}
 
+	/**
+	 * get condition
+	 * @return
+	 */
 	public String getDescription() {
 		return description;
 	}
 
+	/**
+	 * get iconCode
+	 * @return
+	 */
 	public String getIconCode() {
 		return iconCode;
 	}

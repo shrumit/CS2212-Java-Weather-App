@@ -28,6 +28,10 @@ public class Location {
 	private static final String ltermPrefix = "/forecast/daily?id=";
 	private static final String urlSuffix = "&mode=json";
 
+	/**
+	 * constructor to initialize timezone and current time
+	 * @param cityId
+	 */
 	public Location(int cityId) {
 		this.cityId = cityId;
 		makeJsons();
@@ -47,6 +51,9 @@ public class Location {
 		makeShortTerm();
 	}
 
+	/**
+	 * call the API
+	 */
 	private void makeJsons() {
 		currentJson = MiscOperations.readFromURL(urlPrefix + currentPrefix
 				+ cityId + urlSuffix);
@@ -57,6 +64,9 @@ public class Location {
 
 	}
 
+	/**
+	 * determine the coordinates used for the json
+	 */
 	private void setCoordinates() {
 		JSONObject entire = new JSONObject(currentJson);
 		JSONObject coord = entire.getJSONObject("coord");
@@ -66,6 +76,9 @@ public class Location {
 
 	}
 
+	/**
+	 * parse through json and get Long Term information
+	 */
 	private void makeLongTerm() {
 		JSONObject entire = new JSONObject(longJson);
 		JSONArray listArray = entire.getJSONArray("list");
@@ -101,6 +114,9 @@ public class Location {
 		}
 	}
 
+	/**
+	 * parse through json and get Short Term information
+	 */
 	private void makeShortTerm() {
 
 		JSONObject entire = new JSONObject(shortJson);
@@ -130,6 +146,9 @@ public class Location {
 
 	}
 
+	/**
+	 * parse through json and get current weather
+	 */
 	private void makeCurrent() {
 
 		int tempInt; // intermediate variable for casting double (given by api)
@@ -184,6 +203,10 @@ public class Location {
 		//
 	}
 
+	/**
+	 * get most recent update time
+	 * @return
+	 */
 	public String getRefreshTime() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd MMM hh:mm a");
 		sdf.setTimeZone(refreshTime.getTimeZone());

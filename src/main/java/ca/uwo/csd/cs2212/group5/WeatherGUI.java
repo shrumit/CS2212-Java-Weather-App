@@ -47,6 +47,7 @@ public class WeatherGUI {
 
 	/**
 	 * @wbp.parser.entryPoint
+	 * Sets up the appropriate window for the location type and the location ID for the GUI
 	 */
 	public static void startWeather(int cityId, String name) {
 
@@ -96,6 +97,9 @@ public class WeatherGUI {
 
 	}
 
+	/**
+	 * Render and display all necessary information in the Mars window
+	 */
 	private static void renderMars() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new MigLayout());
@@ -128,10 +132,16 @@ public class WeatherGUI {
 
 	}
 
+	/**
+	 * Reload all necessary information by recalling initial method
+	 */
 	public static void refreshData() {
 		startWeather(this_cityId, this_name);
 	}
 
+	/**
+	 * Sets functionality of menu bar
+	 */
 	private static void renderMenuBar() {
 
 		JMenuBar menuBar = new JMenuBar();
@@ -195,6 +205,9 @@ public class WeatherGUI {
 
 	}
 
+	/**
+	 * Error message if calling the API results in an error
+	 */
 	private static void displayErrorFrame() {
 
 		JFrame error = new JFrame("Controlled Error");
@@ -224,7 +237,10 @@ public class WeatherGUI {
 		error.pack();
 		error.setVisible(true);
 	}
-
+	
+	/**
+	 * Objects: different panels for current weather, long term and short term
+	 */
 	private static JPanel cPanel;
 	private static JPanel lPanel;
 	private static JPanel sPanel;
@@ -260,6 +276,9 @@ public class WeatherGUI {
 
 	}
 
+	/**
+	 * Fills in the information needed in the current weather frame
+	 */
 	private static void populateCurrent() {
 		JLabel temp = new JLabel(loc.cw.getTemperature(isCelsius)
 				+ getUnitChar());
@@ -303,6 +322,9 @@ public class WeatherGUI {
 
 	}
 
+	/**
+	 * Fills in the required information for the long term frame
+	 */
 	private static void populateLT() {
 		JPanel[] ilPanel = new JPanel[5];
 
@@ -339,6 +361,9 @@ public class WeatherGUI {
 
 	}
 
+	/**
+	 * Fills in the required information for the short term frame 
+	 */
 	private static void populateST() {
 		JPanel[] isPanel = new JPanel[8];
 
@@ -368,6 +393,11 @@ public class WeatherGUI {
 		}
 	}
 
+	/**
+	 * Returns the condition icon image from an API call given the code
+	 * @param code
+	 * @return
+	 */
 	private static Image getIconImage(String code) {
 		StringBuilder ret = new StringBuilder();
 		ret.append(iconUrl);
@@ -384,6 +414,10 @@ public class WeatherGUI {
 
 	}
 
+	/**
+	 * Determines the temperature unit
+	 * @return
+	 */
 	private static String getUnitChar() {
 		if (isCelsius)
 			return ("\u00B0C");
@@ -391,6 +425,10 @@ public class WeatherGUI {
 			return ("\u00B0F");
 	}
 
+	/**
+	 * sets a global font
+	 * @param f
+	 */
 	private static void setUIFont(javax.swing.plaf.FontUIResource f) {
 		java.util.Enumeration keys = UIManager.getDefaults().keys();
 		while (keys.hasMoreElements()) {

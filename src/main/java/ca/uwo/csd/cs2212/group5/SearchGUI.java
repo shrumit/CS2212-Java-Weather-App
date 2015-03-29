@@ -25,6 +25,10 @@ public class SearchGUI {
 	private static Iterator iterator;
 	private static int currentIndex = -1;
 
+	/**
+	 * driver for the search window
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 		frame = new JFrame("Select Location");
@@ -38,6 +42,9 @@ public class SearchGUI {
 
 	}
 
+	/**
+	 * reads the search query
+	 */
 	public static void readInput() {
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
@@ -78,6 +85,9 @@ public class SearchGUI {
 		});
 	}
 
+	/**
+	 * determines which search result you select
+	 */
 	private static void selection() {
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent le) {
@@ -98,10 +108,18 @@ public class SearchGUI {
 
 	}
 
+	/**
+	 * verifies if a valid city name is given
+	 * @param arg
+	 * @return
+	 */
 	private static boolean isAlpha(String arg) {
 		return arg.matches("[a-zA-Z,. ]+");
 	}
 
+	/**
+	 * sets up the frame for the GUI
+	 */
 	private static void renderGUI() {
 
 		setUIFont(new javax.swing.plaf.FontUIResource(new Font("Arial",
@@ -135,7 +153,11 @@ public class SearchGUI {
 		panel.add(mars);
 
 	}
-
+	
+	/**
+	 * sets the global font
+	 * @param f
+	 */
 	private static void setUIFont(javax.swing.plaf.FontUIResource f) {
 		java.util.Enumeration keys = UIManager.getDefaults().keys();
 		while (keys.hasMoreElements()) {
