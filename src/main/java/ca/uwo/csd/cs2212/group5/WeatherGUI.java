@@ -48,7 +48,7 @@ public class WeatherGUI {
 	 *                        type and the location ID for the GUI
 	 */
 	public static void startWeather(int cityId, String name) {
-
+		
 		if (cityId == -1) {
 			try {
 

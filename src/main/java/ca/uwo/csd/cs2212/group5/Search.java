@@ -14,6 +14,7 @@ public class Search {
 
 	/**
 	 * Constructor to determine city names
+	 * 
 	 * @param arg
 	 */
 	public Search(String arg) {
@@ -23,12 +24,12 @@ public class Search {
 			JSONObject main = new JSONObject(jsonString);
 			JSONArray array = main.getJSONArray("list");
 
-			count = (int) main.get("count");
+			count = Integer.parseInt(main.get("count").toString());
 			api = new City[count];
 
 			for (int i = 0; i < count; i++) {
 				JSONObject location = array.getJSONObject(i);
-				int id = (int) location.get("id");
+				int id = Integer.parseInt(location.get("id").toString());
 				String city = location.getString("name");
 				String country = location.getJSONObject("sys").getString(
 						"country");
@@ -44,6 +45,7 @@ public class Search {
 
 	/**
 	 * iterator to get results and put in arraylist
+	 * 
 	 * @return
 	 */
 	public Iterator<String> getResults() {

@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>ca.uwo.csd.cs2212.group5.app</groupId>
 	<artifactId>cs2212group5</artifactId>
-	<version>0.5</version>
+	<version>1.0</version>
 	<name>Group Project</name>
 	<description>This is a Weather app that are developing for our group project</description>
 
