@@ -9,6 +9,7 @@ public class MarsCurrent {
 	private int pressure;
 	private int humidity;
 	private String description;
+	private String code;
 
 	/**
 	 * constructor
@@ -82,6 +83,10 @@ public class MarsCurrent {
 			this.description = "Condition unavailable.";
 		} else
 			this.description = condition;
+	}
+	
+	public void setIcon(String code){
+		this.code = code;
 	}
 
 	/**
@@ -163,6 +168,10 @@ public class MarsCurrent {
 	 */
 	public String getCondition() {
 		return description;
+	}
+
+	public String getIcon() {
+		return code;
 	}
 
 }

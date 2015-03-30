@@ -35,7 +35,7 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>ca.uwo.csd.cs2212.group5.GUI</mainClass>
+							<mainClass>ca.uwo.csd.cs2212.group5.SearchGUI</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
