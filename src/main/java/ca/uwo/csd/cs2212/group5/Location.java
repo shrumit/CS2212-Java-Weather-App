@@ -29,12 +29,17 @@ public class Location {
 	private static final String urlSuffix = "&mode=json";
 
 	/**
-	 * constructor to initialize timezone and current time
+	 * Constructor to initialize timezone and current time
+	 * 
 	 * @param cityId
 	 */
 	public Location(int cityId) {
 		this.cityId = cityId;
 		makeJsons();
+		if ((currentJson.length() == 0) || (longJson.length() == 0)
+				|| (shortJson.length() == 0))
+			makeJsons();
+
 		setCoordinates();
 
 		// Initialize timezone of city
@@ -46,15 +51,17 @@ public class Location {
 		// Initialize refresh time to current time
 		refreshTime = Calendar.getInstance();
 
-		makeCurrent();
 		makeLongTerm();
 		makeShortTerm();
+		makeCurrent();
 	}
 
 	/**
-	 * call the API
+	 * Gets json from api and stores it in strings
 	 */
 	private void makeJsons() {
+		System.out.println("here");
+
 		currentJson = MiscOperations.readFromURL(urlPrefix + currentPrefix
 				+ cityId + urlSuffix);
 		longJson = MiscOperations.readFromURL(urlPrefix + ltermPrefix + cityId
@@ -65,7 +72,7 @@ public class Location {
 	}
 
 	/**
-	 * determine the coordinates used for the json
+	 * Determines the coordinates used for the json. Used to extract timezone
 	 */
 	private void setCoordinates() {
 		JSONObject entire = new JSONObject(currentJson);
@@ -200,11 +207,11 @@ public class Location {
 		// Sunrise Time
 		cw.setSunrise(Long.parseLong(sys.get("sunrise").toString()));
 
-		//
 	}
 
 	/**
 	 * get most recent update time
+	 * 
 	 * @return
 	 */
 	public String getRefreshTime() {

@@ -7,20 +7,24 @@ import java.util.TimeZone;
 public class ShortTerm {
 
 	private String description;
+	private TimeZone timezone;
 	private int temperature;
 	private Calendar time;
 	private String iconCode;
 
 	/**
 	 * Constructor
+	 * 
 	 * @param timezone
 	 */
 	public ShortTerm(String timezone) {
-		time = Calendar.getInstance(TimeZone.getTimeZone(timezone));
+		this.timezone = TimeZone.getTimeZone(timezone);
+		time = Calendar.getInstance(this.timezone);
 	}
-	
+
 	/**
-	 * set temperature attribute of object as parameter
+	 * Set temperature attribute of object as parameter
+	 * 
 	 * @param value
 	 */
 	public void setTemp(int value) {
@@ -28,7 +32,8 @@ public class ShortTerm {
 	}
 
 	/**
-	 * set weather condition attribute of object as parameter
+	 * Set weather condition attribute of object as parameter
+	 * 
 	 * @param description
 	 */
 	public void setDescription(String description) {
@@ -36,7 +41,8 @@ public class ShortTerm {
 	}
 
 	/**
-	 * set time given parameter
+	 * Set time given parameter
+	 * 
 	 * @param unixTime
 	 */
 	public void setTime(long unixTime) {
@@ -44,17 +50,18 @@ public class ShortTerm {
 	}
 
 	/**
-	 * set icon attribute of object as parameter
+	 * Set icon attribute of object as parameter
+	 * 
 	 * @param iconCode
 	 */
 	public void setIcon(String iconCode) {
 		this.iconCode = iconCode;
 	}
-	
+
 	/**
-	 * get temperature
-	 * @param cels
-	 * @return
+	 * Returns the temperature in the preferred unit.
+	 * 
+	 * @return String temperature
 	 */
 	public String getTemp(boolean cels) {
 		int tempInt = MiscOperations.temperatureUnit(temperature, cels);
@@ -62,41 +69,32 @@ public class ShortTerm {
 	}
 
 	/**
-	 * get condition
-	 * @return
+	 * Returns a formatted string describing the weather condition.
+	 * 
+	 * @return String description of the weather
 	 */
 	public String getDescription() {
 		return description;
 	}
 
 	/**
-	 * get time
-	 * @return
+	 * Returns a formatted string showing the time.
+	 * 
+	 * @return String indicating time.
 	 */
 	public String getTime() {
 		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
-		sdf.setTimeZone(time.getTimeZone());
+		sdf.setTimeZone(timezone);
 		return sdf.format(time.getTime());
 	}
 
 	/**
-	 * get icon
+	 * Returns the icon code
+	 * 
+	 * @return String icon code
 	 */
 	public String getIcon() {
 		return iconCode;
 	}
 
-	/**
-	 * unit change
-	 * @param unitCelsius
-	 * @return
-	 */
-	public String toString(boolean unitCelsius) {
-		
-		StringBuilder ret = new StringBuilder();
-		ret.append(" " + description);
-		ret.append("<br/>" + "<span style=\"color:#0000cd;\"><strong>"
-				+ MiscOperations.temperatureUnit(temperature, unitCelsius) + "</strong></span>");
-		return ret.toString();
-	}
 }

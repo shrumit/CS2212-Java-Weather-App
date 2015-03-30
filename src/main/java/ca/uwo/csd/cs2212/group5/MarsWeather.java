@@ -39,7 +39,8 @@ public class MarsWeather {
 
 		// Wind Speed
 		try {
-			tempInt = (int) Double.parseDouble(main.get("wind_speed").toString());
+			tempInt = (int) Double.parseDouble(main.get("wind_speed")
+					.toString());
 			mr.setWindSpeed(tempInt);
 		} catch (Exception e) {
 			mr.setWindSpeed(0);

@@ -37,8 +37,8 @@ public class WeatherGUI {
 	private static final Font textFont = new Font("Arial", Font.PLAIN, 20);
 
 	/**
-	 * @wbp.parser.entryPoint
-	 * Sets up the appropriate window for the location type and the location ID for the GUI
+	 * @wbp.parser.entryPoint Sets up the appropriate window for the location
+	 *                        type and the location ID for the GUI
 	 */
 	public static void startWeather(int cityId, String name) {
 
@@ -61,6 +61,7 @@ public class WeatherGUI {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				displayErrorFrame();
 
 			}
 		}
@@ -76,8 +77,6 @@ public class WeatherGUI {
 
 				renderMenuBar();
 				renderGUI();
-				// frame.setBounds(0, 0, 1000, 500);
-				// frame.setBackground(new Color(228,237,244));
 				frame.pack();
 				frame.setVisible(true);
 
@@ -229,7 +228,7 @@ public class WeatherGUI {
 		error.pack();
 		error.setVisible(true);
 	}
-	
+
 	/**
 	 * Objects: different panels for current weather, long term and short term
 	 */
@@ -282,8 +281,9 @@ public class WeatherGUI {
 				+ loc.getRefreshTime());
 
 		refreshTime.setTitleColor(borderColor);
-		refreshTime.setTitleJustification(TitledBorder.RIGHT);
-//		refreshTime.setBorder(new LineBorder(Color.orange));
+		refreshTime.setTitleJustification(TitledBorder.LEFT);
+		refreshTime.setTitlePosition(TitledBorder.ABOVE_TOP);
+		// refreshTime.setBorder(new LineBorder(Color.orange));
 
 		cPanel.setBorder(refreshTime);
 
@@ -339,7 +339,7 @@ public class WeatherGUI {
 			temp.setFont(new Font(temp.getFont().getFontName(), 1, 25));
 			JLabel low = new JLabel("Low: " + loc.lt[i].getMinTemp(isCelsius)
 					+ getUnitChar());
-			JLabel high = new JLabel("High: " + loc.lt[i].getMaxTemp(isCelsius)
+			JLabel high = new JLabel("  High: " + loc.lt[i].getMaxTemp(isCelsius)
 					+ getUnitChar());
 
 			JLabel image = new JLabel(new ImageIcon(
@@ -360,7 +360,7 @@ public class WeatherGUI {
 	}
 
 	/**
-	 * Fills in the required information for the short term frame 
+	 * Fills in the required information for the short term frame
 	 */
 	private static void populateST() {
 		JPanel[] isPanel = new JPanel[8];
@@ -396,6 +396,7 @@ public class WeatherGUI {
 
 	/**
 	 * Returns the condition icon image from an API call given the code
+	 * 
 	 * @param code
 	 * @return
 	 */
@@ -417,6 +418,7 @@ public class WeatherGUI {
 
 	/**
 	 * Determines the temperature unit
+	 * 
 	 * @return
 	 */
 	private static String getUnitChar() {
@@ -428,6 +430,7 @@ public class WeatherGUI {
 
 	/**
 	 * sets a global font
+	 * 
 	 * @param f
 	 */
 	private static void setUIFont(javax.swing.plaf.FontUIResource f) {

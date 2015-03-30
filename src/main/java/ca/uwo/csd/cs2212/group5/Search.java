@@ -46,8 +46,8 @@ public class Search {
 	 * iterator to get results and put in arraylist
 	 * @return
 	 */
-	public Iterator getResults() {
-		ArrayList al = new ArrayList();
+	public Iterator<String> getResults() {
+		ArrayList<String> al = new ArrayList<String>();
 
 		if (count == 0) {
 			al.add("No results found.");

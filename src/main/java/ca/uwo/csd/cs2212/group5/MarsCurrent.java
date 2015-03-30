@@ -18,6 +18,7 @@ public class MarsCurrent {
 
 	/**
 	 * set humidity as value of parameter
+	 * 
 	 * @param value
 	 */
 	public void setHumidity(int value) {
@@ -26,6 +27,7 @@ public class MarsCurrent {
 
 	/**
 	 * set wind speed as value of parameter
+	 * 
 	 * @param value
 	 */
 	public void setWindSpeed(int value) {
@@ -35,6 +37,7 @@ public class MarsCurrent {
 
 	/**
 	 * set wind direction as value of parameter
+	 * 
 	 * @param dir
 	 */
 	public void setWindDir(String dir) {
@@ -43,6 +46,7 @@ public class MarsCurrent {
 
 	/**
 	 * set pressure as value of parameter
+	 * 
 	 * @param value
 	 */
 	public void setPressure(int value) {
@@ -51,6 +55,7 @@ public class MarsCurrent {
 
 	/**
 	 * set min temp as value of parameter
+	 * 
 	 * @param value
 	 */
 	public void setMinTemp(int value) {
@@ -59,6 +64,7 @@ public class MarsCurrent {
 
 	/**
 	 * set max temp as value of parameter
+	 * 
 	 * @param value
 	 */
 	public void setMaxTemp(int value) {
@@ -67,6 +73,7 @@ public class MarsCurrent {
 
 	/**
 	 * set condition as value of parameter
+	 * 
 	 * @param condition
 	 */
 	public void setCondition(String condition) {
@@ -77,10 +84,9 @@ public class MarsCurrent {
 			this.description = condition;
 	}
 
-	// /////////////////
-
 	/**
 	 * return humidity
+	 * 
 	 * @return
 	 */
 	public String getHumidity() {
@@ -90,6 +96,7 @@ public class MarsCurrent {
 
 	/**
 	 * return wind speed
+	 * 
 	 * @return
 	 */
 	public String getWindSpeed() {
@@ -101,6 +108,7 @@ public class MarsCurrent {
 
 	/**
 	 * return wind direction
+	 * 
 	 * @return
 	 */
 	public String getWindDir() {
@@ -109,6 +117,7 @@ public class MarsCurrent {
 
 	/**
 	 * return pressure
+	 * 
 	 * @return
 	 */
 	public String getPressure() {
@@ -118,6 +127,7 @@ public class MarsCurrent {
 
 	/**
 	 * return min temp
+	 * 
 	 * @param cels
 	 * @return
 	 */
@@ -133,6 +143,7 @@ public class MarsCurrent {
 
 	/**
 	 * return max temp
+	 * 
 	 * @param cels
 	 * @return
 	 */
@@ -147,6 +158,7 @@ public class MarsCurrent {
 
 	/**
 	 * return condition
+	 * 
 	 * @return
 	 */
 	public String getCondition() {

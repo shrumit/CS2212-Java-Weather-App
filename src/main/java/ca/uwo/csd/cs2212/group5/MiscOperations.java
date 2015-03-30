@@ -14,8 +14,6 @@ import org.json.JSONObject;
  */
 public class MiscOperations {
 
-	// for the conversion of wind directions
-	private static final double N = 0;
 	private static final double NNE = 22.5;
 	private static final double NE = 45;
 	private static final double ENE = 67.5;

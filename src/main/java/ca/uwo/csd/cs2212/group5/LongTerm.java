@@ -12,25 +12,30 @@ public class LongTerm {
 	private Calendar time;
 	private String description;
 	private String iconCode;
+	private TimeZone timezone;
 
 	/**
 	 * constructor
+	 * 
 	 * @param timezone
 	 */
 	public LongTerm(String timezone) {
-		time = Calendar.getInstance(TimeZone.getTimeZone(timezone));
+		this.timezone = TimeZone.getTimeZone(timezone);
+		time = Calendar.getInstance(this.timezone);
 	}
 
 	/**
-	 * set temperature as value of parameter
-	 * @param value
+	 * Set temperature as value of parameter
+	 * 
+	 * @param temperature
 	 */
-	public void setTemp(int value) {
-		this.temperature = value;
+	public void setTemp(int temperature) {
+		this.temperature = temperature;
 	}
 
 	/**
-	 * set min temp as value of parameter
+	 * Set min temp as value of parameter
+	 * 
 	 * @param value
 	 */
 	public void setMinTemp(int value) {
@@ -38,7 +43,8 @@ public class LongTerm {
 	}
 
 	/**
-	 * set max temp as value of parameter
+	 * Set max temp as value of parameter
+	 * 
 	 * @param value
 	 */
 	public void setMaxTemp(int value) {
@@ -46,7 +52,8 @@ public class LongTerm {
 	}
 
 	/**
-	 * set time as value of parameter
+	 * Set time as value of parameter
+	 * 
 	 * @param unixTime
 	 */
 	public void setTime(long unixTime) {
@@ -54,7 +61,8 @@ public class LongTerm {
 	}
 
 	/**
-	 * set condition as value of parameter
+	 * Set condition as value of parameter
+	 * 
 	 * @param description
 	 */
 	public void setDescription(String description) {
@@ -62,7 +70,8 @@ public class LongTerm {
 	}
 
 	/**
-	 * set iconCode as value of parameter
+	 * Set iconCode as value of parameter
+	 * 
 	 * @param iconCode
 	 */
 	public void setIcon(String iconCode) {
@@ -70,18 +79,9 @@ public class LongTerm {
 	}
 
 	/**
-	 * return description as a string
-	 * @param isCelsius
-	 * @return
-	 */
-	public String toString(boolean isCelsius) {
-		return description;
-	}
-
-	/**
-	 * get temperature
-	 * @param cels
-	 * @return
+	 * Returns the temperature in the preferred unit.
+	 * 
+	 * @return String temperature
 	 */
 	public String getTemp(boolean cels) {
 		int tempInt = MiscOperations.temperatureUnit(temperature, cels);
@@ -89,9 +89,9 @@ public class LongTerm {
 	}
 
 	/**
-	 * get min temp
-	 * @param cels
-	 * @return
+	 * Returns a minimum temperature in the preferred unit.
+	 * 
+	 * @return String minimum temperature
 	 */
 	public String getMinTemp(boolean cels) {
 		int tempInt = MiscOperations.temperatureUnit(minTemp, cels);
@@ -99,9 +99,9 @@ public class LongTerm {
 	}
 
 	/**
-	 * get max temp
-	 * @param cels
-	 * @return
+	 * Returns a maximum temperature in the preferred unit.
+	 * 
+	 * @return String maximum temperature
 	 */
 	public String getMaxTemp(boolean cels) {
 		int tempInt = MiscOperations.temperatureUnit(maxTemp, cels);
@@ -109,25 +109,28 @@ public class LongTerm {
 	}
 
 	/**
-	 * get time
-	 * @return
+	 * Returns a formatted string showing the time.
+	 * 
+	 * @return String indicating time.
 	 */
 	public String getTime() {
 		SimpleDateFormat sdf = new SimpleDateFormat("MMM dd");
-		sdf.setTimeZone(time.getTimeZone());
+		sdf.setTimeZone(timezone);
 		return sdf.format(time.getTime());
 	}
 
 	/**
-	 * get condition
-	 * @return
+	 * Returns a formatted string describing the weather condition.
+	 * 
+	 * @return String description of the weather
 	 */
 	public String getDescription() {
 		return description;
 	}
 
-	/** 
+	/**
 	 * get iconCode
+	 * 
 	 * @return
 	 */
 	public String getIcon() {

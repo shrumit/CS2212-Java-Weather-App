@@ -15,7 +15,7 @@ import java.util.TimeZone;
 
 public class CurrentWeather {
 
-	private String timezone;
+	private TimeZone timezone;
 	private int temperature;
 	private int speed;
 	private String direction;
@@ -33,9 +33,9 @@ public class CurrentWeather {
 	 * Initializes everything to null.
 	 */
 	public CurrentWeather(String timezone) {
-		this.timezone = timezone;
-		sunrise = Calendar.getInstance(TimeZone.getTimeZone(timezone));
-		sunset = Calendar.getInstance(TimeZone.getTimeZone(timezone));
+		this.timezone = TimeZone.getTimeZone(timezone);
+		sunrise = Calendar.getInstance(this.timezone);
+		sunset = Calendar.getInstance(this.timezone);
 	}
 
 	/**
@@ -110,9 +110,10 @@ public class CurrentWeather {
 		String dir = MiscOperations.convertWindDir(value);
 		direction = dir;
 	}
-	
+
 	/**
-	 * sets condition using parameter
+	 * Sets Condition using parameter
+	 * 
 	 * @param description
 	 */
 	public void setDescription(String description) {
@@ -121,7 +122,8 @@ public class CurrentWeather {
 	}
 
 	/**
-	 * sets iconCode using parameter
+	 * Sets iconCode using parameter.
+	 * 
 	 * @param code
 	 */
 	public void setIconCode(String code) {
@@ -129,16 +131,20 @@ public class CurrentWeather {
 	}
 
 	/**
-	 * sets sunset time
+	 * Sets sunset time
+	 * 
 	 * @param sunset
+	 *            time in unix time
 	 */
 	public void setSunset(long sunset) {
 		this.sunset.setTimeInMillis(sunset * 1000);
 	}
 
 	/**
-	 * sets sunrise time
+	 * Sets sunrise time
+	 * 
 	 * @param sunrise
+	 *            time in unix time
 	 */
 	public void setSunrise(long sunrise) {
 		this.sunrise.setTimeInMillis(sunrise * 1000);
@@ -147,9 +153,9 @@ public class CurrentWeather {
 	// ///////////////////////////////////////////
 
 	/**
-	 * get temperature with conversion
-	 * @param cels
-	 * @return
+	 * Returns the temperature in the preferred unit.
+	 * 
+	 * @return String temperature
 	 */
 	public String getTemperature(boolean cels) {
 		int tempInt = MiscOperations.temperatureUnit(temperature, cels);
@@ -157,33 +163,36 @@ public class CurrentWeather {
 	}
 
 	/**
-	 * get humidity
-	 * @return
+	 * Returns the humidity.
+	 * 
+	 * @return String humidity
 	 */
 	public String getHumidity() {
 		return Integer.toString(humidity);
 	}
 
 	/**
-	 * get wind speed
-	 * @return
+	 * Returns the wind speed.
+	 * 
+	 * @return String wind speed
 	 */
 	public String getWind() {
 		return Integer.toString(speed) + "km/h";
 	}
 
 	/**
-	 * get pressure
-	 * @return
+	 * Returns the pressure.
+	 * 
+	 * @return String pressure
 	 */
 	public String getPressure() {
 		return Integer.toString(pressure);
 	}
 
 	/**
-	 * get min temp with conversion if needed
-	 * @param cels
-	 * @return
+	 * Returns a minimum temperature in the preferred unit.
+	 * 
+	 * @return String minimum temperature
 	 */
 	public String getMinTemp(boolean cels) {
 		int tempInt = MiscOperations.temperatureUnit(minTemp, cels);
@@ -191,9 +200,9 @@ public class CurrentWeather {
 	}
 
 	/**
-	 * get max temp with conversion if needed
-	 * @param cels
-	 * @return
+	 * Returns a maximum temperature in the preferred unit.
+	 * 
+	 * @return String maximum temperature
 	 */
 	public String getMaxTemp(boolean cels) {
 		int tempInt = MiscOperations.temperatureUnit(maxTemp, cels);
@@ -201,36 +210,40 @@ public class CurrentWeather {
 	}
 
 	/**
-	 * get wind direction
-	 * @return
+	 * Returns a string with wind direction.
+	 * 
+	 * @return String direction of wind
 	 */
 	public String getWindDir() {
 		return direction;
 	}
 
 	/**
-	 * get sunset time
-	 * @return
+	 * Returns a formatted string showing the sunset time.
+	 * 
+	 * @return String indicating sunset time.
 	 */
 	public String getSunset() {
 		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
-		sdf.setTimeZone(sunset.getTimeZone());
+		sdf.setTimeZone(timezone);
 		return sdf.format(sunset.getTime());
 	}
 
 	/**
-	 * get sunrise time
-	 * @return
+	 * Returns a formatted string showing the sunrise time.
+	 * 
+	 * @return String indicating sunrise time.
 	 */
 	public String getSunrise() {
 		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
-		sdf.setTimeZone(sunrise.getTimeZone());
+		sdf.setTimeZone(timezone);
 		return sdf.format(sunrise.getTime());
 	}
 
 	/**
-	 * get condition
-	 * @return
+	 * Returns a formatted string describing the weather condition.
+	 * 
+	 * @return String description of the weather
 	 */
 	public String getDescription() {
 		return description;
@@ -238,6 +251,7 @@ public class CurrentWeather {
 
 	/**
 	 * get iconCode
+	 * 
 	 * @return
 	 */
 	public String getIconCode() {
