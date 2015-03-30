@@ -37,7 +37,7 @@ public class WeatherGUI {
 
 	private static final Color megBackgroundCol = new Color(35, 43, 108);
 	private static final Color minBackgroundCol = new Color(0, 12, 74);
-	private static final Color marsBackgroundCol = new Color(6, 6, 106);
+	private static final Color marsBackgroundCol = new Color(171, 1, 1);
 	private static final Color borderColor = new Color(156, 175, 194);
 	private static final Color textColor = new Color(255,255,255);
 	private static final Font textFont = new Font("Arial", Font.PLAIN, 20);
@@ -164,12 +164,6 @@ public class WeatherGUI {
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 
-		if (this_cityId == -1) {
-			menuBar.setBackground(new Color(227, 135, 82));
-
-		} else {
-			menuBar.setBackground(new Color(138, 155, 171));
-		}
 		JMenu mnProgram = new JMenu("Program");
 		menuBar.add(mnProgram);
 		JMenuItem mntmExit = new JMenuItem("Exit");
@@ -386,6 +380,7 @@ public class WeatherGUI {
 			JLabel high = new JLabel("  High: " + loc.lt[i].getMaxTemp(isCelsius)
 					+ getUnitChar());
 			high.setForeground(textColor);
+
 			JLabel image = new JLabel(new ImageIcon(
 					getIconImage(loc.lt[i].getIcon())));
 
