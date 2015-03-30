@@ -60,8 +60,6 @@ public class Location {
 	 * Gets json from api and stores it in strings
 	 */
 	private void makeJsons() {
-		System.out.println("here");
-
 		currentJson = MiscOperations.readFromURL(urlPrefix + currentPrefix
 				+ cityId + urlSuffix);
 		longJson = MiscOperations.readFromURL(urlPrefix + ltermPrefix + cityId

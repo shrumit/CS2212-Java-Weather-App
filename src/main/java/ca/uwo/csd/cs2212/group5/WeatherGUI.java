@@ -6,6 +6,8 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
@@ -32,12 +34,21 @@ public class WeatherGUI {
 	private static final String iconUrl = "http://openweathermap.org/img/w/";
 	private static final String iconUrl2 = ".png";
 	private static MarsWeather mars;
+<<<<<<< HEAD
 	private static final Color megBackgroundCol = new Color(35, 43, 108);
 	private static final Color minBackgroundCol = new Color(0, 12, 74);
 	private static final Color borderColor = new Color(156, 175, 194);
 	private static final Color textColor = new Color(255,255,255);
 	private static final Font textFont = new Font("Arial", Font.PLAIN, 20);
 	
+=======
+	private static Color backgroundCol = new Color(237, 243, 248);
+	private static Color borderColor = new Color(156, 175, 194);
+	private static final Font textFont = new Font("Arial", Font.PLAIN, 20);
+
+	private static final JFrame error = new JFrame("Controlled Error");
+
+>>>>>>> origin/master
 	/**
 	 * @wbp.parser.entryPoint Sets up the appropriate window for the location
 	 *                        type and the location ID for the GUI
@@ -46,19 +57,19 @@ public class WeatherGUI {
 
 		if (cityId == -1) {
 			try {
+				backgroundCol = new Color(232, 200, 161);
 
 				this_name = "Mars - Curiosity Rover";
 				this_cityId = cityId;
 
-				mars = new MarsWeather();
-
 				frame = new JFrame(this_name);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				mars = new MarsWeather();
 
 				renderMenuBar();
 				renderMars();
 
-				frame.setBounds(50, 50, 400, 400);
+				frame.setBounds(50, 50, 400, 500);
 				frame.setVisible(true);
 
 			} catch (Exception e) {
@@ -71,6 +82,7 @@ public class WeatherGUI {
 		else {
 			this_name = name;
 			this_cityId = cityId;
+			backgroundCol = new Color(237, 243, 248);
 
 			try {
 				loc = new Location(cityId);
@@ -88,14 +100,22 @@ public class WeatherGUI {
 			}
 		}
 
+		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+			public void run() {
+				System.out.println("In shutdown hook");
+			}
+		}, "Shutdown-thread"));
+
 	}
 
 	/**
 	 * Render and display all necessary information in the Mars window
 	 */
 	private static void renderMars() {
+
 		JPanel panel = new JPanel();
 		panel.setLayout(new MigLayout());
+		panel.setBackground(backgroundCol);
 
 		System.out.println(mars.getRefreshTime());
 		TitledBorder refreshTime = new TitledBorder("Refresh Time: "
@@ -119,6 +139,13 @@ public class WeatherGUI {
 		JLabel condition = new JLabel(mars.mr.getCondition());
 		condition.setForeground(textColor);
 
+		ImageIcon icon = new ImageIcon(getIconImage(mars.mr.getIcon()));
+		Image img = icon.getImage();
+		Image newimg = img.getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+		JLabel image = new JLabel(new ImageIcon(newimg));
+
+		condition.setFont(new Font("Arial", Font.BOLD, 20));
+		panel.add(image, "wrap");
 		panel.add(condition, "wrap");
 		panel.add(min, "wrap");
 		panel.add(max, "wrap");
@@ -144,7 +171,13 @@ public class WeatherGUI {
 
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
-		menuBar.setBackground(new Color(138, 155, 171));
+
+		if (this_cityId == -1) {
+			menuBar.setBackground(new Color(227, 135, 82));
+
+		} else {
+			menuBar.setBackground(new Color(138, 155, 171));
+		}
 		JMenu mnProgram = new JMenu("Program");
 		menuBar.add(mnProgram);
 		JMenuItem mntmExit = new JMenuItem("Exit");
@@ -152,7 +185,7 @@ public class WeatherGUI {
 
 		mntmExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				frame.dispose();
 			}
 		});
 
@@ -208,7 +241,11 @@ public class WeatherGUI {
 	 */
 	private static void displayErrorFrame() {
 
+<<<<<<< HEAD
 		final JFrame error = new JFrame("Controlled Error");
+=======
+		// error = new JFrame("Controlled Error");
+>>>>>>> origin/master
 		error.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		error.setBounds(500, 300, 0, 0);
 
@@ -357,10 +394,16 @@ public class WeatherGUI {
 			temp.setFont(new Font(temp.getFont().getFontName(), 1, 25));
 			JLabel low = new JLabel("Low: " + loc.lt[i].getMinTemp(isCelsius)
 					+ getUnitChar());
+<<<<<<< HEAD
 			low.setForeground(textColor);
 			JLabel high = new JLabel("  High: " + loc.lt[i].getMaxTemp(isCelsius)
 					+ getUnitChar());
 			high.setForeground(textColor);
+=======
+			JLabel high = new JLabel("  High: "
+					+ loc.lt[i].getMaxTemp(isCelsius) + getUnitChar());
+
+>>>>>>> origin/master
 			JLabel image = new JLabel(new ImageIcon(
 					getIconImage(loc.lt[i].getIcon())));
 
@@ -461,5 +504,9 @@ public class WeatherGUI {
 				UIManager.put(key, f);
 			}
 		}
+	}
+
+	private static void closeMethod() {
+
 	}
 }

@@ -26,11 +26,9 @@ public class MarsWeather {
 		main = main.getJSONObject("report");
 		int tempInt;
 		String tempString;
-		System.out.println(main);
 
 		// Minimum Temperature
 		tempInt = (int) Double.parseDouble(main.get("min_temp").toString());
-		System.out.println(tempInt);
 		mr.setMinTemp(tempInt);
 
 		// Maximum Temperature
@@ -60,8 +58,14 @@ public class MarsWeather {
 
 		// Condition Description
 		tempString = main.getString("atmo_opacity");
-		System.out.println("String" + tempString);
 		mr.setCondition(tempString);
+
+		// Condition Icon
+		if (mr.getCondition().equalsIgnoreCase("Sunny")) {
+			mr.setIcon("01d");
+			
+
+		}
 
 		// Humidity
 		try {
