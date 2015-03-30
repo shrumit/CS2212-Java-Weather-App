@@ -39,16 +39,12 @@ public class WeatherGUI {
 	private static final Color minBackgroundCol = new Color(0, 12, 74);
 	private static final Color marsBackgroundCol = new Color(171, 1, 1);
 	private static final Color borderColor = new Color(156, 175, 194);
-	private static final Color textColor = new Color(255,255,255);
+	private static final Color textColor = new Color(255, 255, 255);
 	private static final Font textFont = new Font("Arial", Font.PLAIN, 20);
 	private static final JFrame error = new JFrame("Controlled Error");
 
-	/**
-	 * @wbp.parser.entryPoint Sets up the appropriate window for the location
-	 *                        type and the location ID for the GUI
-	 */
 	public static void startWeather(int cityId, String name) {
-		
+
 		if (cityId == -1) {
 			try {
 
@@ -349,7 +345,6 @@ public class WeatherGUI {
 		cPanel.add(pressure, "wrap");
 		cPanel.add(speed);
 		cPanel.setBackground(megBackgroundCol);
-		
 
 	}
 
@@ -377,8 +372,8 @@ public class WeatherGUI {
 			JLabel low = new JLabel("Low: " + loc.lt[i].getMinTemp(isCelsius)
 					+ getUnitChar());
 			low.setForeground(textColor);
-			JLabel high = new JLabel("  High: " + loc.lt[i].getMaxTemp(isCelsius)
-					+ getUnitChar());
+			JLabel high = new JLabel("  High: "
+					+ loc.lt[i].getMaxTemp(isCelsius) + getUnitChar());
 			high.setForeground(textColor);
 
 			JLabel image = new JLabel(new ImageIcon(
