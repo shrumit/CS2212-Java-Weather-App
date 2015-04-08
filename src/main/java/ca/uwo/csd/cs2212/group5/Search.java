@@ -5,6 +5,13 @@ import java.util.Iterator;
 
 import org.json.*;
 
+/**
+ * This class takes a string argument, sends a search request to the OWM api and
+ * provides a method to return the search results as an Iterator.
+ * 
+ * @author Shrumit
+ *
+ */
 public class Search {
 
 	private City[] api;
@@ -13,7 +20,8 @@ public class Search {
 	private int count;
 
 	/**
-	 * Constructor to determine city names
+	 * Constructor. It sends argument to the api and retrieves and stores
+	 * results in an array.
 	 * 
 	 * @param arg
 	 */
@@ -44,9 +52,11 @@ public class Search {
 	}
 
 	/**
-	 * iterator to get results and put in arraylist
+	 * Returns a String Iterator containing all the search results. It does so
+	 * by converting the privately-stored array to an ArrayList which is then
+	 * returned as its Iterator
 	 * 
-	 * @return
+	 * @return Iterator<String> containing search results
 	 */
 	public Iterator<String> getResults() {
 		ArrayList<String> al = new ArrayList<String>();

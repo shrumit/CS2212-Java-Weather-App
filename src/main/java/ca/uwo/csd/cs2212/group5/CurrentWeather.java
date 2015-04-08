@@ -5,14 +5,13 @@ import java.util.Calendar;
 import java.util.TimeZone;
 
 /**
- * This class constructs an object storing various weather data. The data is
- * stored in objects of the Parameter class. Time is stored in objects of the
- * Time class.
+ * This class is to be used as a datatype object that stores various parameters
+ * that describe the current weather at a particular location. Getter and setter
+ * methods are provided for all parameters, in addition to a constructor.
  * 
- * @author Team 5
+ * @author CS2212 Team 5
  *
  */
-
 public class CurrentWeather {
 
 	private TimeZone timezone;
@@ -30,7 +29,11 @@ public class CurrentWeather {
 	private Calendar sunset;
 
 	/**
-	 * Initializes everything to null.
+	 * Constructor that sets the timezone for the class and initializes the
+	 * sunrise and sunset Calendar objects to that timezone.
+	 * 
+	 * @param timezone
+	 *            is the timezone identifier at this location
 	 */
 	public CurrentWeather(String timezone) {
 		this.timezone = TimeZone.getTimeZone(timezone);
@@ -39,20 +42,20 @@ public class CurrentWeather {
 	}
 
 	/**
-	 * Sets temperature
+	 * Sets temperature.
 	 * 
 	 * @param value
-	 *            is the temperature
+	 *            the temperature in Kelvin
 	 */
 	public void setTemperature(int value) {
 		temperature = value;
 	}
 
 	/**
-	 * Sets humidity
+	 * Sets humidity.
 	 * 
 	 * @param value
-	 *            is the humidity
+	 *            the humidity in percent
 	 */
 	public void setHumidity(int value) {
 		humidity = value;
@@ -62,7 +65,7 @@ public class CurrentWeather {
 	 * Sets wind speed after converting from m/s to km/h
 	 * 
 	 * @param value
-	 *            is the wind speed in m/s
+	 *            the wind speed in m/s
 	 */
 	public void setWindSpeed(int value) {
 		value = MiscOperations.windConvert(value);
@@ -70,10 +73,10 @@ public class CurrentWeather {
 	}
 
 	/**
-	 * Sets pressure
+	 * Sets pressure.
 	 * 
 	 * @param value
-	 *            is the pressure
+	 *            the pressure in hPa
 	 */
 	public void setPressure(int value) {
 		pressure = value;
@@ -83,7 +86,7 @@ public class CurrentWeather {
 	 * Sets minimum temperature
 	 * 
 	 * @param value
-	 *            is the temperature
+	 *            is the minimum temperature in Kelvin
 	 */
 	public void setMinTemp(int value) {
 		minTemp = value;
@@ -93,7 +96,7 @@ public class CurrentWeather {
 	 * Sets maximum temperature
 	 * 
 	 * @param value
-	 *            is the temperature
+	 *            is the minimum temperature in Kelvin
 	 */
 	public void setMaxTemp(int value) {
 		maxTemp = value;
@@ -112,9 +115,10 @@ public class CurrentWeather {
 	}
 
 	/**
-	 * Sets Condition using parameter
+	 * Sets description of the weather condition.
 	 * 
 	 * @param description
+	 *            is the description
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -125,6 +129,7 @@ public class CurrentWeather {
 	 * Sets iconCode using parameter.
 	 * 
 	 * @param code
+	 *            code used by OWM to label a particular icon
 	 */
 	public void setIconCode(String code) {
 		this.iconCode = code;
@@ -150,12 +155,14 @@ public class CurrentWeather {
 		this.sunrise.setTimeInMillis(sunrise * 1000);
 	}
 
-	// ///////////////////////////////////////////
+	/* Getters */
 
 	/**
 	 * Returns the temperature in the preferred unit.
 	 * 
-	 * @return String temperature
+	 * @param cels
+	 *            Celsius if true; Farhenheit if false
+	 * @return temperature in the preferred unit
 	 */
 	public String getTemperature(boolean cels) {
 		int tempInt = MiscOperations.temperatureUnit(temperature, cels);
@@ -165,7 +172,7 @@ public class CurrentWeather {
 	/**
 	 * Returns the humidity.
 	 * 
-	 * @return String humidity
+	 * @return String humidity in %
 	 */
 	public String getHumidity() {
 		return Integer.toString(humidity);
@@ -174,7 +181,7 @@ public class CurrentWeather {
 	/**
 	 * Returns the wind speed.
 	 * 
-	 * @return String wind speed
+	 * @return String wind speed in km/h
 	 */
 	public String getWind() {
 		return Integer.toString(speed) + "km/h";
@@ -183,16 +190,18 @@ public class CurrentWeather {
 	/**
 	 * Returns the pressure.
 	 * 
-	 * @return String pressure
+	 * @return String pressure in hPa
 	 */
 	public String getPressure() {
 		return Integer.toString(pressure);
 	}
 
 	/**
-	 * Returns a minimum temperature in the preferred unit.
+	 * Returns the minimum temperature in the preferred unit.
 	 * 
-	 * @return String minimum temperature
+	 * @param cels
+	 *            Celsius if true; Farhenheit if false
+	 * @return minimum temperature in the preferred unit
 	 */
 	public String getMinTemp(boolean cels) {
 		int tempInt = MiscOperations.temperatureUnit(minTemp, cels);
@@ -200,9 +209,11 @@ public class CurrentWeather {
 	}
 
 	/**
-	 * Returns a maximum temperature in the preferred unit.
+	 * Returns the maximum temperature in the preferred unit.
 	 * 
-	 * @return String maximum temperature
+	 * @param cels
+	 *            Celsius if true; Farhenheit if false
+	 * @return maximum temperature in the preferred unit
 	 */
 	public String getMaxTemp(boolean cels) {
 		int tempInt = MiscOperations.temperatureUnit(maxTemp, cels);
@@ -221,7 +232,7 @@ public class CurrentWeather {
 	/**
 	 * Returns a formatted string showing the sunset time.
 	 * 
-	 * @return String indicating sunset time.
+	 * @return String indicating sunset time formatted as "hh:mm a"
 	 */
 	public String getSunset() {
 		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
@@ -232,7 +243,7 @@ public class CurrentWeather {
 	/**
 	 * Returns a formatted string showing the sunrise time.
 	 * 
-	 * @return String indicating sunrise time.
+	 * @return String indicating sunrise time formatted as "hh:mm a"
 	 */
 	public String getSunrise() {
 		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
@@ -250,9 +261,9 @@ public class CurrentWeather {
 	}
 
 	/**
-	 * get iconCode
+	 * Returns String representing the OWM icon code
 	 * 
-	 * @return
+	 * @return icon code used by OWM
 	 */
 	public String getIconCode() {
 		return iconCode;

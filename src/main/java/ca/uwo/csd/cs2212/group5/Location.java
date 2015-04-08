@@ -2,10 +2,19 @@ package ca.uwo.csd.cs2212.group5;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+/**
+ * This class takes a cityId. It then fetches the current weather, forecast by
+ * day and forecast by 3-hour increments from the OWM server in JSON format. The
+ * JSON string is then parsed and the pertinent data is stored in one object of
+ * CurrentWeather, 5 objects of LongTerm (ie 5 days daily forecast) and 8
+ * objects of ShortTerm (ie 8*3 = 24 hour forecast).
+ * 
+ * @author CS2212 Team 5
+ *
+ */
 public class Location {
 
 	private double longitude;
@@ -29,9 +38,12 @@ public class Location {
 	private static final String urlSuffix = "&mode=json";
 
 	/**
-	 * Constructor to initialize timezone and current time
+	 * Constructor that takes the city id, gets the timezone, stores the current
+	 * (refresh) time and calls other methods. It then calls makeJsons(),
+	 * setCoordinates(), makeLongTerm(), makeShortTerm(), and make Current()
 	 * 
 	 * @param cityId
+	 *            is the identifier used by OWM for a particular city
 	 */
 	public Location(int cityId) {
 		this.cityId = cityId;
@@ -57,7 +69,8 @@ public class Location {
 	}
 
 	/**
-	 * Gets json from api and stores it in strings
+	 * Gets JSON from the OWM api using the stored prefixes and stores it all in
+	 * strings.
 	 */
 	private void makeJsons() {
 		currentJson = MiscOperations.readFromURL(urlPrefix + currentPrefix
@@ -70,7 +83,8 @@ public class Location {
 	}
 
 	/**
-	 * Determines the coordinates used for the json. Used to extract timezone
+	 * Determines the coordinates of this city from the JSON. These are used to
+	 * extract the timezone.
 	 */
 	private void setCoordinates() {
 		JSONObject entire = new JSONObject(currentJson);
@@ -82,7 +96,8 @@ public class Location {
 	}
 
 	/**
-	 * parse through json and get Long Term information
+	 * Parses through JSON for the long term weather and makes 5 objects of the
+	 * LongTerm class containing weather data.
 	 */
 	private void makeLongTerm() {
 		JSONObject entire = new JSONObject(longJson);
@@ -120,7 +135,8 @@ public class Location {
 	}
 
 	/**
-	 * parse through json and get Short Term information
+	 * Parses through JSON for the short term weather and makes 8 objects of the
+	 * ShortTerm class containing weather data.
 	 */
 	private void makeShortTerm() {
 
@@ -152,7 +168,8 @@ public class Location {
 	}
 
 	/**
-	 * parse through json and get current weather
+	 * Parses through JSON for the current weather and makes an object of the
+	 * CurrentWeather class containing weather data.
 	 */
 	private void makeCurrent() {
 
@@ -208,9 +225,10 @@ public class Location {
 	}
 
 	/**
-	 * get most recent update time
+	 * Returns a string containing the refresh time (ie when the contructor was
+	 * called).
 	 * 
-	 * @return
+	 * @return a String showing time formatted as "dd MMM hh:MM a"
 	 */
 	public String getRefreshTime() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd MMM hh:mm a");

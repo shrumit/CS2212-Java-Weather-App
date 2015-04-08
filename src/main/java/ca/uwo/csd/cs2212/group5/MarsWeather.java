@@ -5,6 +5,14 @@ import java.util.Calendar;
 
 import org.json.JSONObject;
 
+/**
+ * It then fetches the weather on Mars in JSON format from Mars Atmospheric
+ * Aggregation System API. The JSON string is then parsed and the pertinent data
+ * is stored in one object MarsCurrent
+ * 
+ * @author CS2212 Team 5
+ *
+ */
 public class MarsWeather {
 
 	private final String url = "http://marsweather.ingenology.com/v1/latest/?format=json";
@@ -14,6 +22,10 @@ public class MarsWeather {
 	private boolean speedZero = false;
 	private String jsonString;
 
+	/**
+	 * Constructor that stores the current (refresh) time, gets JSON string from
+	 * the api server and parses it by calling parseJson()
+	 */
 	public MarsWeather() {
 		refreshTime = Calendar.getInstance();
 		jsonString = MiscOperations.readFromURL(url);
@@ -21,6 +33,10 @@ public class MarsWeather {
 		parseJson();
 	}
 
+	/**
+	 * Parses through JSON and stores data in an instance of the object
+	 * MarsCurrent.
+	 */
 	private void parseJson() {
 		JSONObject main = new JSONObject(jsonString);
 		main = main.getJSONObject("report");
@@ -63,7 +79,6 @@ public class MarsWeather {
 		// Condition Icon
 		if (mr.getCondition().equalsIgnoreCase("Sunny")) {
 			mr.setIcon("01d");
-			
 
 		}
 
@@ -77,6 +92,12 @@ public class MarsWeather {
 
 	}
 
+	/**
+	 * Returns a string containing the refresh time (ie when the contructor was
+	 * called).
+	 * 
+	 * @return a String showing time formatted as "dd MMM hh:MM a"
+	 */
 	public String getRefreshTime() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd MMM hh:mm a");
 		sdf.setTimeZone(refreshTime.getTimeZone());

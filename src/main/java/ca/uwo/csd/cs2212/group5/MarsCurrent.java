@@ -1,5 +1,13 @@
 package ca.uwo.csd.cs2212.group5;
 
+/**
+ * This class is to be used as a datatype object that stores various parameters
+ * that describe the current weather on Mars. Getter and setter methods are
+ * provided for all parameters, in addition to a constructor.
+ * 
+ * @author CS2212 Team 5
+ *
+ */
 public class MarsCurrent {
 
 	private int minTemp;
@@ -12,24 +20,26 @@ public class MarsCurrent {
 	private String code;
 
 	/**
-	 * constructor
+	 * Constructor
 	 */
 	public MarsCurrent() {
 	}
 
 	/**
-	 * set humidity as value of parameter
+	 * Sets humidity.
 	 * 
 	 * @param value
+	 *            the humidity in percent
 	 */
 	public void setHumidity(int value) {
 		humidity = value;
 	}
 
 	/**
-	 * set wind speed as value of parameter
+	 * Sets wind speed after converting from m/s to km/h
 	 * 
 	 * @param value
+	 *            the wind speed in m/s
 	 */
 	public void setWindSpeed(int value) {
 		value = MiscOperations.windConvert(value);
@@ -37,45 +47,50 @@ public class MarsCurrent {
 	}
 
 	/**
-	 * set wind direction as value of parameter
+	 * Sets wind direction
 	 * 
-	 * @param dir
+	 * @param value
+	 *            the direction as a string
 	 */
 	public void setWindDir(String dir) {
 		direction = dir;
 	}
 
 	/**
-	 * set pressure as value of parameter
+	 * Sets pressure.
 	 * 
 	 * @param value
+	 *            the pressure in hPa
 	 */
 	public void setPressure(int value) {
 		pressure = value;
 	}
 
 	/**
-	 * set min temp as value of parameter
+	 * Sets minimum temperature
 	 * 
 	 * @param value
+	 *            is the minimum temperature in Celsius
 	 */
 	public void setMinTemp(int value) {
 		minTemp = value;
 	}
 
 	/**
-	 * set max temp as value of parameter
+	 * Sets maximum temperature
 	 * 
 	 * @param value
+	 *            is the minimum temperature in Celsius
 	 */
 	public void setMaxTemp(int value) {
 		maxTemp = value;
 	}
 
 	/**
-	 * set condition as value of parameter
+	 * Sets description of the weather condition.
 	 * 
-	 * @param condition
+	 * @param description
+	 *            is the description
 	 */
 	public void setCondition(String condition) {
 		System.out.println(condition);
@@ -84,15 +99,21 @@ public class MarsCurrent {
 		} else
 			this.description = condition;
 	}
-	
-	public void setIcon(String code){
+
+	/**
+	 * Sets iconCode using parameter.
+	 * 
+	 * @param code
+	 *            code used by OWM to label a particular icon
+	 */
+	public void setIcon(String code) {
 		this.code = code;
 	}
 
 	/**
-	 * return humidity
+	 * Returns the humidity.
 	 * 
-	 * @return
+	 * @return String humidity in %
 	 */
 	public String getHumidity() {
 		return Integer.toString(humidity);
@@ -100,9 +121,9 @@ public class MarsCurrent {
 	}
 
 	/**
-	 * return wind speed
+	 * Returns the wind speed.
 	 * 
-	 * @return
+	 * @return String wind speed in km/h
 	 */
 	public String getWindSpeed() {
 		if (speed != 0)
@@ -112,18 +133,18 @@ public class MarsCurrent {
 	}
 
 	/**
-	 * return wind direction
+	 * Returns a string with wind direction.
 	 * 
-	 * @return
+	 * @return String direction of wind
 	 */
 	public String getWindDir() {
 		return direction;
 	}
 
 	/**
-	 * return pressure
+	 * Returns the pressure.
 	 * 
-	 * @return
+	 * @return String pressure in hPa
 	 */
 	public String getPressure() {
 		return Integer.toString(pressure);
@@ -131,10 +152,11 @@ public class MarsCurrent {
 	}
 
 	/**
-	 * return min temp
+	 * Returns the minimum temperature in the preferred unit.
 	 * 
 	 * @param cels
-	 * @return
+	 *            Celsius if true; Farhenheit if false
+	 * @return minimum temperature in the preferred unit
 	 */
 	public String getMinTemp(boolean cels) {
 
@@ -147,10 +169,11 @@ public class MarsCurrent {
 	}
 
 	/**
-	 * return max temp
+	 * Returns the maximum temperature in the preferred unit.
 	 * 
 	 * @param cels
-	 * @return
+	 *            Celsius if true; Farhenheit if false
+	 * @return maximum temperature in the preferred unit
 	 */
 	public String getMaxTemp(boolean cels) {
 		if (cels)
@@ -162,14 +185,19 @@ public class MarsCurrent {
 	}
 
 	/**
-	 * return condition
+	 * Returns a formatted string describing the weather condition.
 	 * 
-	 * @return
+	 * @return String description of the weather
 	 */
 	public String getCondition() {
 		return description;
 	}
 
+	/**
+	 * Returns String representing the OWM icon code
+	 * 
+	 * @return icon code used by OWM
+	 */
 	public String getIcon() {
 		return code;
 	}

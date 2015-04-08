@@ -24,6 +24,16 @@ import javax.swing.border.TitledBorder;
 
 import net.miginfocom.swing.MigLayout;
 
+/**
+ * This class takes the cityId, calls an instance of Location from which it
+ * fetches data for current, long term and short term weather conditions. This
+ * data is displayed in a GUI window.
+ * 
+ * This class also displays the weather condition for Mars.
+ * 
+ * @author CS2212 Team 5
+ *
+ */
 public class WeatherGUI {
 
 	private static JFrame frame;
@@ -43,6 +53,15 @@ public class WeatherGUI {
 	private static final Font textFont = new Font("Arial", Font.PLAIN, 20);
 	private static final JFrame error = new JFrame("Controlled Error");
 
+	/**
+	 * Primary method which takes cityId and name and displays weather for that
+	 * cityId.
+	 * 
+	 * @param cityId
+	 *            OWM id of the location for which to display the weather
+	 * @param name
+	 *            name of the city, which is displayed on the title bar
+	 */
 	public static void startWeather(int cityId, String name) {
 
 		if (cityId == -1) {
@@ -97,7 +116,7 @@ public class WeatherGUI {
 	}
 
 	/**
-	 * Render and display all necessary information in the Mars window
+	 * Displays all necessary information in the Mars window
 	 */
 	private static void renderMars() {
 
@@ -146,14 +165,16 @@ public class WeatherGUI {
 	}
 
 	/**
-	 * Reload all necessary information by recalling initial method
+	 * Reloads all necessary information by recalling the initial method with
+	 * the same parameters.
 	 */
 	public static void refreshData() {
 		startWeather(this_cityId, this_name);
 	}
 
 	/**
-	 * Sets functionality of menu bar
+	 * Sets the menu bar and adds action listeners for the various options in
+	 * it.
 	 */
 	private static void renderMenuBar() {
 
@@ -219,7 +240,9 @@ public class WeatherGUI {
 	}
 
 	/**
-	 * Error message if calling the API results in an error
+	 * Displays a dialog box with an error message in case of an error while
+	 * fetching data from the OWM api. This is most useful when the API service
+	 * is offline.
 	 */
 	private static void displayErrorFrame() {
 
@@ -251,13 +274,14 @@ public class WeatherGUI {
 		error.setVisible(true);
 	}
 
-	/**
-	 * Objects: different panels for current weather, long term and short term
-	 */
 	private static JPanel cPanel;
 	private static JPanel lPanel;
 	private static JPanel sPanel;
 
+	/**
+	 * Displays the window for the weather and populates it with all the weather
+	 * data arranged in an organized manner.
+	 */
 	private static void renderGUI() {
 
 		setUIFont(new javax.swing.plaf.FontUIResource(textFont));
@@ -291,7 +315,7 @@ public class WeatherGUI {
 	}
 
 	/**
-	 * Fills in the information needed in the current weather frame
+	 * Populated the data needed in the current weather frame
 	 */
 	private static void populateCurrent() {
 		JLabel temp = new JLabel(loc.cw.getTemperature(isCelsius)
@@ -349,7 +373,7 @@ public class WeatherGUI {
 	}
 
 	/**
-	 * Fills in the required information for the long term frame
+	 * Populated the data needed in the long term weather frame
 	 */
 	private static void populateLT() {
 		JPanel[] ilPanel = new JPanel[5];
@@ -394,7 +418,7 @@ public class WeatherGUI {
 	}
 
 	/**
-	 * Fills in the required information for the short term frame
+	 * Populated the data needed in the short term weather frame
 	 */
 	private static void populateST() {
 		JPanel[] isPanel = new JPanel[8];
@@ -429,7 +453,7 @@ public class WeatherGUI {
 	}
 
 	/**
-	 * Returns the condition icon image from an API call given the code
+	 * Returns the condition icon image from OWM given the code
 	 * 
 	 * @param code
 	 * @return
@@ -451,7 +475,8 @@ public class WeatherGUI {
 	}
 
 	/**
-	 * Determines the temperature unit
+	 * Returns the Unicode character for degrees along with the symbol for the
+	 * temperature unit.
 	 * 
 	 * @return
 	 */
@@ -463,7 +488,7 @@ public class WeatherGUI {
 	}
 
 	/**
-	 * sets a global font
+	 * Sets a global font
 	 * 
 	 * @param f
 	 */
@@ -478,7 +503,4 @@ public class WeatherGUI {
 		}
 	}
 
-	private static void closeMethod() {
-
-	}
 }

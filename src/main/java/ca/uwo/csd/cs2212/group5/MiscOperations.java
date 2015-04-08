@@ -6,10 +6,10 @@ import java.net.URL;
 import org.json.JSONObject;
 
 /**
- * This static class provides various conversion operations for the data
- * retrieved from the API.
+ * This static class holds methods that are common to various classes throughout
+ * the project. to use
  * 
- * @author Team 5
+ * @author CS2212 Team 5
  *
  */
 public class MiscOperations {
@@ -45,17 +45,33 @@ public class MiscOperations {
 	 * Converts temperature from Kelvin to Celsius
 	 * 
 	 * @param kelvin
-	 *            is temperature in Kelvin
+	 *            temperature in Kelvin
 	 * @return the temperature in Celsius
 	 */
 	public static int getCelsius(int kelvin) {
 		return (int) (kelvin - 273.15);
 	}
 
+	/**
+	 * Converts temperature from Kelvin to Farhenheit
+	 * 
+	 * @param kelvin
+	 *            temperature in Kelvin
+	 * @return the temperature in Farhenheit
+	 */
 	public static int getFarhenheit(int kelvin) {
 		return (int) ((getCelsius(kelvin) * 9) / 5) + 32;
 	}
 
+	/**
+	 * Converts temperature from Kelvin to the unit specified by the boolean.
+	 * 
+	 * @param kelvin
+	 *            temperature in Kelvin
+	 * @param unit
+	 *            Celsius if true, Farhenheit if false
+	 * @return temperature in Farhenheit in the desired unit
+	 */
 	public static int temperatureUnit(int kelvin, boolean unit) {
 		if (unit)
 			return (getCelsius(kelvin));
@@ -71,7 +87,6 @@ public class MiscOperations {
 	 * Uses Google's Timezone API. The local timezone is needed in order to
 	 * properly display (local) sunset/sunrise time.
 	 * 
-	 * @throws WeatherException
 	 */
 	public static String determineTimezone(double latti, double longi) {
 
@@ -108,7 +123,7 @@ public class MiscOperations {
 	 * raw JSON String from the supplied URL
 	 * 
 	 * @param url
-	 *            is the url from which JSON is to be fetched
+	 *            the url from which JSON is to be fetched
 	 * @return returns all the text on the supplied url webpage
 	 */
 	public static String readFromURL(String url) {
@@ -133,6 +148,8 @@ public class MiscOperations {
 	}
 
 	/**
+	 * Converts direction that is in degrees to a one-,two-, or three-letter
+	 * string compass representation.
 	 * 
 	 * @param dir
 	 *            is wind direction in degrees

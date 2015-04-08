@@ -4,6 +4,14 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
 
+/**
+ * This class is to be used as a datatype object that stores various parameters
+ * that describe a day's weather at a particular location. Getter and setter
+ * methods are provided for all parameters, in addition to a constructor.
+ * 
+ * @author CS2212 Team 5
+ *
+ */
 public class LongTerm {
 
 	private int temperature;
@@ -15,9 +23,11 @@ public class LongTerm {
 	private TimeZone timezone;
 
 	/**
-	 * constructor
+	 * Constructor that sets the timezone for the class and initializes the
+	 * sunrise and sunset Calendar objects to that timezone.
 	 * 
 	 * @param timezone
+	 *            is the timezone identifier at this location
 	 */
 	public LongTerm(String timezone) {
 		this.timezone = TimeZone.getTimeZone(timezone);
@@ -25,63 +35,73 @@ public class LongTerm {
 	}
 
 	/**
-	 * Set temperature as value of parameter
+	 * Sets temperature.
 	 * 
-	 * @param temperature
+	 * @param value
+	 *            the temperature in Kelvin
 	 */
 	public void setTemp(int temperature) {
 		this.temperature = temperature;
 	}
 
 	/**
-	 * Set min temp as value of parameter
+	 * Sets minimum temperature.
 	 * 
 	 * @param value
+	 *            the temperature in Kelvin
 	 */
 	public void setMinTemp(int value) {
 		this.minTemp = value;
 	}
 
 	/**
-	 * Set max temp as value of parameter
+	 * Sets maximum temperature.
 	 * 
 	 * @param value
+	 *            the temperature in Kelvin
 	 */
 	public void setMaxTemp(int value) {
 		this.maxTemp = value;
 	}
 
 	/**
-	 * Set time as value of parameter
+	 * Sets the time for which this object stores the data
 	 * 
 	 * @param unixTime
+	 *            the unix time in milliseconds
 	 */
 	public void setTime(long unixTime) {
 		time.setTimeInMillis(unixTime * 1000);
 	}
 
 	/**
-	 * Set condition as value of parameter
+	 * Sets description of the weather condition.
 	 * 
 	 * @param description
+	 *            is the description
 	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
 	/**
-	 * Set iconCode as value of parameter
+	 * Sets iconCode using parameter.
 	 * 
-	 * @param iconCode
+	 * @param code
+	 *            code used by OWM to label a particular icon
 	 */
 	public void setIcon(String iconCode) {
 		this.iconCode = iconCode;
 	}
 
+	/* Getters */
+
 	/**
 	 * Returns the temperature in the preferred unit.
 	 * 
-	 * @return String temperature
+	 * @param cels
+	 *            Celsius if true; Farhenheit if false
+	 * @return temperature in the preferred unit
 	 */
 	public String getTemp(boolean cels) {
 		int tempInt = MiscOperations.temperatureUnit(temperature, cels);
@@ -89,9 +109,11 @@ public class LongTerm {
 	}
 
 	/**
-	 * Returns a minimum temperature in the preferred unit.
+	 * Returns the minimum temperature in the preferred unit.
 	 * 
-	 * @return String minimum temperature
+	 * @param cels
+	 *            Celsius if true; Farhenheit if false
+	 * @return temperature in the preferred unit
 	 */
 	public String getMinTemp(boolean cels) {
 		int tempInt = MiscOperations.temperatureUnit(minTemp, cels);
@@ -99,9 +121,11 @@ public class LongTerm {
 	}
 
 	/**
-	 * Returns a maximum temperature in the preferred unit.
+	 * Returns the maximum temperature in the preferred unit.
 	 * 
-	 * @return String maximum temperature
+	 * @param cels
+	 *            Celsius if true; Farhenheit if false
+	 * @return temperature in the preferred unit
 	 */
 	public String getMaxTemp(boolean cels) {
 		int tempInt = MiscOperations.temperatureUnit(maxTemp, cels);
@@ -109,9 +133,10 @@ public class LongTerm {
 	}
 
 	/**
-	 * Returns a formatted string showing the time.
+	 * Returns a formatted string showing the date for which this instance
+	 * stores the weather data.
 	 * 
-	 * @return String indicating time.
+	 * @return String indicating time formatted as "MMM dd"
 	 */
 	public String getTime() {
 		SimpleDateFormat sdf = new SimpleDateFormat("MMM dd");
@@ -129,9 +154,9 @@ public class LongTerm {
 	}
 
 	/**
-	 * get iconCode
+	 * Returns String representing the OWM icon code
 	 * 
-	 * @return
+	 * @return icon code used by OWM
 	 */
 	public String getIcon() {
 		return iconCode;

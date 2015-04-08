@@ -11,6 +11,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
 
+/**
+ * This class displays the GUI for the Search dialog box. This class also houses
+ * the main method.
+ * 
+ * @author CS2212 Team 05
+ *
+ */
 public class SearchGUI {
 
 	private static JFrame frame;
@@ -25,9 +32,10 @@ public class SearchGUI {
 	private static int currentIndex = -1;
 	private static final Color backgroundCol = new Color(237, 243, 248);
 
-
 	/**
-	 * driver for the search window
+	 * Main method. Calls other methods in order to display the search dialog
+	 * box.
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -44,7 +52,8 @@ public class SearchGUI {
 	}
 
 	/**
-	 * reads the search query
+	 * Reads the search argument entered by the user, passes it to the Search
+	 * class and displays results in a list.
 	 */
 	public static void readInput() {
 		searchButton.addActionListener(new ActionListener() {
@@ -87,7 +96,8 @@ public class SearchGUI {
 	}
 
 	/**
-	 * determines which search result you select
+	 * Calls WeatherGUI based on the selected search result.
+	 * 
 	 */
 	private static void selection() {
 		list.addListSelectionListener(new ListSelectionListener() {
@@ -110,7 +120,9 @@ public class SearchGUI {
 	}
 
 	/**
-	 * verifies if a valid city name is given
+	 * Method that uses a regular expression in order to verify that the
+	 * user-entered search string consists of valid characters.
+	 * 
 	 * @param arg
 	 * @return
 	 */
@@ -119,7 +131,7 @@ public class SearchGUI {
 	}
 
 	/**
-	 * sets up the frame for the GUI
+	 * Sets up the JFrame and puts elements in it such as buttons and lists.
 	 */
 	private static void renderGUI() {
 
@@ -154,9 +166,10 @@ public class SearchGUI {
 		panel.add(mars);
 
 	}
-	
+
 	/**
-	 * sets the global font
+	 * Sets the global font.
+	 * 
 	 * @param f
 	 */
 	private static void setUIFont(javax.swing.plaf.FontUIResource f) {

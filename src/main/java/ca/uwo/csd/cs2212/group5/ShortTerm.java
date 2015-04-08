@@ -4,6 +4,14 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
 
+/**
+ * This class is to be used as a datatype object that stores various parameters
+ * that describe a day's weather at a particular location. Getter and setter
+ * methods are provided for all parameters, in addition to a constructor.
+ * 
+ * @author CS2212 Team 5
+ *
+ */
 public class ShortTerm {
 
 	private String description;
@@ -13,9 +21,11 @@ public class ShortTerm {
 	private String iconCode;
 
 	/**
-	 * Constructor
+	 * Constructor that sets the timezone for the class and initializes the
+	 * sunrise and sunset Calendar objects to that timezone.
 	 * 
 	 * @param timezone
+	 *            is the timezone identifier at this location
 	 */
 	public ShortTerm(String timezone) {
 		this.timezone = TimeZone.getTimeZone(timezone);
@@ -23,36 +33,40 @@ public class ShortTerm {
 	}
 
 	/**
-	 * Set temperature attribute of object as parameter
+	 * Sets temperature.
 	 * 
 	 * @param value
+	 *            the temperature in Kelvin
 	 */
 	public void setTemp(int value) {
 		this.temperature = value;
 	}
 
 	/**
-	 * Set weather condition attribute of object as parameter
+	 * Sets description of the weather condition.
 	 * 
 	 * @param description
+	 *            is the description
 	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
 	/**
-	 * Set time given parameter
+	 * Sets the time for which this object stores the data
 	 * 
 	 * @param unixTime
+	 *            the unix time in milliseconds
 	 */
 	public void setTime(long unixTime) {
 		time.setTimeInMillis(unixTime * 1000);
 	}
 
 	/**
-	 * Set icon attribute of object as parameter
+	 * Sets iconCode using parameter.
 	 * 
-	 * @param iconCode
+	 * @param code
+	 *            code used by OWM to label a particular icon
 	 */
 	public void setIcon(String iconCode) {
 		this.iconCode = iconCode;
@@ -61,7 +75,9 @@ public class ShortTerm {
 	/**
 	 * Returns the temperature in the preferred unit.
 	 * 
-	 * @return String temperature
+	 * @param cels
+	 *            Celsius if true; Farhenheit if false
+	 * @return temperature in the preferred unit
 	 */
 	public String getTemp(boolean cels) {
 		int tempInt = MiscOperations.temperatureUnit(temperature, cels);
@@ -78,9 +94,10 @@ public class ShortTerm {
 	}
 
 	/**
-	 * Returns a formatted string showing the time.
+	 * Returns a formatted string showing the date for which this instance
+	 * stores the weather data.
 	 * 
-	 * @return String indicating time.
+	 * @return String indicating time formatted as "MMM dd"
 	 */
 	public String getTime() {
 		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
@@ -89,9 +106,9 @@ public class ShortTerm {
 	}
 
 	/**
-	 * Returns the icon code
+	 * Returns String representing the OWM icon code
 	 * 
-	 * @return String icon code
+	 * @return icon code used by OWM
 	 */
 	public String getIcon() {
 		return iconCode;
