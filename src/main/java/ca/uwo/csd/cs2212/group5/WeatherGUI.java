@@ -25,7 +25,7 @@ import javax.swing.border.TitledBorder;
 import net.miginfocom.swing.MigLayout;
 
 /**
- * This class takes the cityId, calls an instance of Location from which it
+ * Takes the cityId and calls an instance of Location from which it
  * fetches data for current, long term and short term weather conditions. This
  * data is displayed in a GUI window.
  * 
@@ -455,8 +455,8 @@ public class WeatherGUI {
 	/**
 	 * Returns the condition icon image from OWM given the code
 	 * 
-	 * @param code
-	 * @return
+	 * @param code icon code used by OWM
+	 * @return Image of the current weather condition
 	 */
 	private static Image getIconImage(String code) {
 		StringBuilder ret = new StringBuilder();
@@ -478,7 +478,7 @@ public class WeatherGUI {
 	 * Returns the Unicode character for degrees along with the symbol for the
 	 * temperature unit.
 	 * 
-	 * @return
+	 * @return a string containing the unicode and the unit
 	 */
 	private static String getUnitChar() {
 		if (isCelsius)
@@ -490,7 +490,7 @@ public class WeatherGUI {
 	/**
 	 * Sets a global font
 	 * 
-	 * @param f
+	 * @param f font to be set
 	 */
 	private static void setUIFont(javax.swing.plaf.FontUIResource f) {
 		java.util.Enumeration keys = UIManager.getDefaults().keys();

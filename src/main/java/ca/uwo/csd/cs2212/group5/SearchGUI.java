@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 import java.util.Iterator;
 
 /**
- * This class displays the GUI for the Search dialog box. This class also houses
+ * Displays the GUI for the Search dialog box. This class also houses
  * the main method.
  * 
  * @author CS2212 Team 05
@@ -37,6 +37,7 @@ public class SearchGUI {
 	 * box.
 	 * 
 	 * @param args
+	 *            arguments
 	 */
 	public static void main(String[] args) {
 
@@ -124,7 +125,8 @@ public class SearchGUI {
 	 * user-entered search string consists of valid characters.
 	 * 
 	 * @param arg
-	 * @return
+	 *            String to be checked
+	 * @return true if string matches regular expression; false otherwise
 	 */
 	private static boolean isAlpha(String arg) {
 		return arg.matches("[a-zA-Z,. ]+");
@@ -171,6 +173,7 @@ public class SearchGUI {
 	 * Sets the global font.
 	 * 
 	 * @param f
+	 *            font to be set
 	 */
 	private static void setUIFont(javax.swing.plaf.FontUIResource f) {
 		java.util.Enumeration keys = UIManager.getDefaults().keys();

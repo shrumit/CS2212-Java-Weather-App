@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.TimeZone;
 
 /**
- * This class is to be used as a datatype object that stores various parameters
+ * Used as a datatype object that stores various parameters
  * that describe a day's weather at a particular location. Getter and setter
  * methods are provided for all parameters, in addition to a constructor.
  * 
@@ -65,7 +65,7 @@ public class ShortTerm {
 	/**
 	 * Sets iconCode using parameter.
 	 * 
-	 * @param code
+	 * @param iconCode
 	 *            code used by OWM to label a particular icon
 	 */
 	public void setIcon(String iconCode) {

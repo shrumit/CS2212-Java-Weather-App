@@ -1,7 +1,7 @@
 package ca.uwo.csd.cs2212.group5;
 
 /**
- * This class is to be used as a datatype object that stores various parameters
+ * Used as a datatype object that stores various parameters
  * related to a particular location viz. the city name, country code and OWM
  * city id. In addition to a constructor, only methods pertinent to this
  * object's use in the weather project are provided (getId() and toString())

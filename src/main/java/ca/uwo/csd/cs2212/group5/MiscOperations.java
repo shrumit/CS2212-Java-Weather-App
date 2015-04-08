@@ -6,8 +6,8 @@ import java.net.URL;
 import org.json.JSONObject;
 
 /**
- * This static class holds methods that are common to various classes throughout
- * the project. to use
+ * Static class that holds methods that are common to various classes throughout
+ * the project.
  * 
  * @author CS2212 Team 5
  *
@@ -86,6 +86,12 @@ public class MiscOperations {
 	 * Determines the timezone of this city based on longitude and lattitude.
 	 * Uses Google's Timezone API. The local timezone is needed in order to
 	 * properly display (local) sunset/sunrise time.
+	 * 
+	 * @param latti
+	 *            lattitude of location
+	 * @param longi
+	 *            longitude of location
+	 * @return String timezone as per the IANA TZ database
 	 * 
 	 */
 	public static String determineTimezone(double latti, double longi) {

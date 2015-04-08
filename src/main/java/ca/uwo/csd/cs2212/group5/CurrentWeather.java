@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.TimeZone;
 
 /**
- * This class is to be used as a datatype object that stores various parameters
+ * Used as a datatype object that stores various parameters
  * that describe the current weather at a particular location. Getter and setter
  * methods are provided for all parameters, in addition to a constructor.
  * 

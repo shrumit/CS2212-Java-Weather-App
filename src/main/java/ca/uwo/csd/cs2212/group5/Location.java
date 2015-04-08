@@ -6,7 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
- * This class takes a cityId. It then fetches the current weather, forecast by
+ * Takes a cityId then fetches the current weather, forecast by
  * day and forecast by 3-hour increments from the OWM server in JSON format. The
  * JSON string is then parsed and the pertinent data is stored in one object of
  * CurrentWeather, 5 objects of LongTerm (ie 5 days daily forecast) and 8

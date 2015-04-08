@@ -6,7 +6,7 @@ import java.util.Calendar;
 import org.json.JSONObject;
 
 /**
- * It then fetches the weather on Mars in JSON format from Mars Atmospheric
+ * Fetches the weather on Mars in JSON format from Mars Atmospheric
  * Aggregation System API. The JSON string is then parsed and the pertinent data
  * is stored in one object MarsCurrent
  * 

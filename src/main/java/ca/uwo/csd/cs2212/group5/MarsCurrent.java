@@ -1,7 +1,7 @@
 package ca.uwo.csd.cs2212.group5;
 
 /**
- * This class is to be used as a datatype object that stores various parameters
+ * Used as a datatype object that stores various parameters
  * that describe the current weather on Mars. Getter and setter methods are
  * provided for all parameters, in addition to a constructor.
  * 
@@ -49,7 +49,7 @@ public class MarsCurrent {
 	/**
 	 * Sets wind direction
 	 * 
-	 * @param value
+	 * @param dir
 	 *            the direction as a string
 	 */
 	public void setWindDir(String dir) {
@@ -89,7 +89,7 @@ public class MarsCurrent {
 	/**
 	 * Sets description of the weather condition.
 	 * 
-	 * @param description
+	 * @param condition
 	 *            is the description
 	 */
 	public void setCondition(String condition) {

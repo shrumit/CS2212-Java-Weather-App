@@ -6,7 +6,7 @@ import java.util.Iterator;
 import org.json.*;
 
 /**
- * This class takes a string argument, sends a search request to the OWM api and
+ * Takes a string argument, sends a search request to the OWM api and
  * provides a method to return the search results as an Iterator.
  * 
  * @author Shrumit
@@ -24,6 +24,7 @@ public class Search {
 	 * results in an array.
 	 * 
 	 * @param arg
+	 *            argument to be searched
 	 */
 	public Search(String arg) {
 		String jsonString = MiscOperations.readFromURL(url1 + arg + url2);
@@ -56,7 +57,7 @@ public class Search {
 	 * by converting the privately-stored array to an ArrayList which is then
 	 * returned as its Iterator
 	 * 
-	 * @return Iterator<String> containing search results
+	 * @return String Iterator containing search results
 	 */
 	public Iterator<String> getResults() {
 		ArrayList<String> al = new ArrayList<String>();
