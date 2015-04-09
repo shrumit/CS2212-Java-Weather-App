@@ -46,6 +46,6 @@ mvn build
 
 ##Javadoc
 
-Javadocs can be found at https://github.com/UWO-2212-W2015/team5/tree/master/doc
+Javadocs can be found at https://github.com/UWO-2212-W2015/team5/tree/master/doc or in /doc from the main folder.
 
 
