@@ -45,7 +45,7 @@ In git bash, the commands are as follows:
 
 ###Usage Demonstration
 
-[This video]() demonstrates the features of the program.
+[This video](https://youtu.be/R0twsMuZOS8) demonstrates the features of the program.
 
 ###Javadoc
 
