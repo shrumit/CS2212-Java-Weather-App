@@ -20,13 +20,14 @@ In order to install the program, the user must have the following installed:
 * Java
 * Maven
 
-On github, download the package as a ZIP or clone to Desktop with this SSH clone URL: git@github.com:UWO-2212-W2015/team5.git. A packaged version is found in the JAR file in the folder "target". The JAR is named cs2212group5-1.0-jar-with-dependencies.jar. THis packaged version is ready to go, and can be used by simply clicking on it.
+On github, download the package as a ZIP or clone to Desktop with this SSH clone URL: git@github.com:UWO-2212-W2015/team5.git. 
+A packaged version is found in the JAR file in the folder "target". The JAR is named cs2212group5-1.0-jar-with-dependencies.jar. This packaged version is ready to go, and can be used by simply clicking on it.
 
 In the git bash, the commands are as follows:
 
-`git clone git@github.com:UWO-2212-W2015/team5.git
+`git clone git@github.com:UWO-2212-W2015/team5.git`
 
-java -jar target/cs2212group5-1.0-jar-with-dependencies.jar`
+`java -jar target/cs2212group5-1.0-jar-with-dependencies.jar`
 
 ###Build
 
@@ -38,9 +39,9 @@ In order to build the program, the user must have the following installed:
 
 In git bash, the commands are as follows:
 
-`git clone git@github.com:UWO-2212-W2015/team5.git
+`git clone git@github.com:UWO-2212-W2015/team5.git`
 
-mvn package`
+`mvn package`
 
 ###Usage Demonstration
 
