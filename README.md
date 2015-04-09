@@ -16,9 +16,9 @@ For a detailed UML diagram that accurately depicts how the program works, visit 
 
 In order to install the program, the user must have the following installed:
 
-Github
-Java
-Maven
+*Github
+*Java
+*Maven
 
 On github, download the package as a ZIP or clone to Desktop with this SSH clone URL: git@github.com:UWO-2212-W2015/team5.git. A packaged version is found in the JAR file in the folder "target". The JAR is named cs2212group5-1.0-jar-with-dependencies.jar. THis packaged version is ready to go, and can be used by simply clicking on it.
 
@@ -31,9 +31,9 @@ java -jar target/cs2212group5-1.0-jar-with-dependencies.jar
 
 In order to build the program, the user must have the following installed:
 
-Github
-Java
-Maven
+*Github
+*Java
+*Maven
 
 In git bash, the commands are as follows:
 
