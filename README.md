@@ -25,6 +25,7 @@ On github, download the package as a ZIP or clone to Desktop with this SSH clone
 In the git bash, the commands are as follows:
 
 `git clone git@github.com:UWO-2212-W2015/team5.git
+
 java -jar target/cs2212group5-1.0-jar-with-dependencies.jar`
 
 ###Build
@@ -38,6 +39,7 @@ In order to build the program, the user must have the following installed:
 In git bash, the commands are as follows:
 
 `git clone git@github.com:UWO-2212-W2015/team5.git
+
 mvn package`
 
 ###Usage Demonstration
